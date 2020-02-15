@@ -1,26 +1,35 @@
 import discord
+import re
 
 
 async def vote_handler(message, bot):
     msg = str(message.content).split(" ")
     command = msg[0:2] + [" ".join(msg[2:])]
-    #print(command)
+    print(command)
 
     devRole = message.guild.get_role(678262267279572993)
+    pattern = re.compile("\:(.*)\:")
 
     try:
         if command[1] == "create":
-            vote = await vote_compile(command[2])
+            # create vote entry
+            vote = await vote_compile(command[2], message.id)
+            await vote_add(vote)
+
             msg = f'**{vote["title"]}**\n{vote["message"]}'
-            #sent = await message.channel.send(msg)
-
-            #emoji = [ await get_emoji(len(vote["options"]),x) for x in range(len(vote["options"])) ]
+            sent = await message.channel.send(msg)
+            for i in range(len(vote["options"])):
+                emoji = await get_emoji(len(vote["options"]), i)
+                await sent.add_reaction(emoji["emoji"])
+        elif command[1] == "end":
+            pass
+        else:
+            await message.channel.send(f"{message.author.mention} -- `{command[1]}` is not a valid action for the command `{command[0]}` ")
     except Exception as e:
-        pass
-        #await message.channel.send(f"hey {devRole.mention} There was an error.\n```\n{e}\n```")
+        await message.channel.send(f"hey {devRole.mention} There was an error.\n```\n{e}\n```")
 
-# create a vote object
-async def vote_compile(string:str):
+# create a vote dict
+async def vote_compile(string: str):
     args = string.split(";")
     options = args[1].split(",")
     print(options)
@@ -30,41 +39,44 @@ async def vote_compile(string:str):
         "message": ""
     }
 
-
     # are we in special shit territory??
     if len(options) <= 2:
         options = ["yes", "no"]
-    elif len(options) > 10:
+    elif len(options) > 11:
         return "Please use no more than 10 vote options."
-    
+
     # compile vote object
     for i, elem in enumerate(options):
         option = {
             "name": elem,
             "votes": 0
         }
+        emoji = await get_emoji(len(options), i)
         vote["options"].append(option)
-        vote["message"] += f":{await get_emoji(len(options), i)}: -- `{elem} `\n\n"
+        vote["message"] += f"{emoji['name']} -- `{elem} `\n\n"
 
     return vote
 # get the appropriate emoji
-async def get_emoji(length:int, index:int):
-    # vote types 
+
+
+async def get_emoji(length: int, index: int):
+    # vote types
     yes_no = [
-        "thumbsup",
-        "thumbsdown"
+        {"name": ":thumbsup:", "emoji": "👍"},
+        {"name": ":thumbsdown:", "emoji": "👎"}
     ]
     number = [
-        "zero",
-        "one",
-        "two",
-        "three",
-        "four",
-        "five",
-        "six",
-        "seven",
-        "eight",
-        "nine"
+        {"name": ":zero:", "emoji": "0️⃣"},
+        {"name": ":one:", "emoji": "1️⃣"},
+        {"name": ":two:", "emoji": "2️⃣"},
+        {"name": ":three:", "emoji": "3️⃣"},
+        {"name": ":four:", "emoji": "4️⃣"},
+        {"name": ":five:", "emoji": "5️⃣"},
+        {"name": ":six:", "emoji": "6️⃣"},
+        {"name": ":seven:", "emoji": "7️⃣"},
+        {"name": ":eight:", "emoji": "8️⃣"},
+        {"name": ":nine:", "emoji": "9️⃣"},
+        {"name": ":ten:", "emoji": "🔟"}
     ]
 
     # return correct emoji
@@ -73,6 +85,14 @@ async def get_emoji(length:int, index:int):
     else:
         return number[index]
 
+async def vote_add(mongo, feature):
+    print(feature)
+    dict = {
+        "feature":feature
+    }
+    print(dict)
+    col = mongo["rwthufflepuffy"]["feature-requests"]
+    col.insert_one(dict)
 
-def vote_create(mongo, message:str):
+def vote_create(bot, message: str):
     pass

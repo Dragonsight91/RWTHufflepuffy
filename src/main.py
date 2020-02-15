@@ -39,12 +39,12 @@ class RWTHufflepuffy(discord.Client):
             print(self.mongo.list_database_names())
 
             # send to command handler
-            await actions.feat_req.handle_feat(self.mongo, message)
+            await commands.feat_req.handle_feat(self.mongo, message)
             print(message.content)
 
         if message.content.startswith('$vote'):
-            # await commands.voting.vote_handler(message, self)
-            pass
+            await commands.voting.vote_handler(message, self)
+
         if message.content.startswith("$study"):
             pass
 
