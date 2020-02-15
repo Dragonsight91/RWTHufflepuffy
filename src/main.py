@@ -44,7 +44,7 @@ class RWTHufflepuffy(discord.Client):
 
         if message.content.startswith('$vote'):
             # await commands.voting.vote_handler(message, self)
-
+            pass
         if message.content.startswith("$study"):
             pass
 
