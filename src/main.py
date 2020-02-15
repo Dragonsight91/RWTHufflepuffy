@@ -14,11 +14,9 @@ class RWTHufflepuffy(discord.Client):
             return
         
         if message.content.startswith('$hello'):
-            print(message.author)
             author = str(message.author).split("#")
-            
             user = discord.utils.get(message.channel.members, name = author[0], discriminator = author[1])
             await message.channel.send(f'Hello {user.mention} !')
 
 bot = RWTHufflepuffy()
-bot.run("Njc4MTg0MzMwOTY2ODU5Nzg2.XkfGvw.tv6t-NA1asbcpgI1GPFTISWrnwM")
+bot.run("Njc4MTg0MzMwOTY2ODU5Nzg2.XkfTLg.oxem-VXXxsRMrJmzST8lQpzl_A8")
