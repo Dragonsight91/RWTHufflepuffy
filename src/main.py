@@ -15,7 +15,7 @@ class RWTHufflepuffy(discord.Client):
         dbpass = "GwoGykaZLbFonSQZ"
         dburl = "rwthufflepuffy-wxfsh.gcp.mongodb.net/test?retryWrites=true&w=majority"
         mongoUri = f"mongodb+srv://{dbuser}:{dbpass}@{dburl}"
-
+ 
         self.mongo = pymongo.MongoClient(mongoUri, port=47410)
         print(self.mongo)
         print(f'\nLogged on as {self.user}!')
@@ -41,6 +41,9 @@ class RWTHufflepuffy(discord.Client):
             # send to command handler
             await actions.feat_req.handle_feat(self.mongo, message)
             print(message.content)
+
+        if message.content.startswith('$vote'):
+            # await commands.voting.vote_handler(message, self)
 
         if message.content.startswith("$study"):
             pass
