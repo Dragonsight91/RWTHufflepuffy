@@ -1,6 +1,7 @@
 # imports
 import discord
 import pymongo
+import re
 from urllib.parse import quote
 
 # import all action handlers
@@ -15,10 +16,39 @@ class RWTHufflepuffy(discord.Client):
         dbpass = "GwoGykaZLbFonSQZ"
         dburl = "rwthufflepuffy-wxfsh.gcp.mongodb.net/test?retryWrites=true&w=majority"
         mongoUri = f"mongodb+srv://{dbuser}:{dbpass}@{dburl}"
- 
+        
+        self.votes = []
         self.mongo = pymongo.MongoClient(mongoUri, port=47410)
+
         print(self.mongo)
         print(f'\nLogged on as {self.user}!')
+
+    async def on_reaction_add(self, reaction, user):
+        # no reacting to own reactions
+        if user == self.user:
+            return
+
+        title = re.compile("\*\*(.*)\*\*")
+        result = list(filter(lambda vote: vote[1]['title'] == title.search(reaction.message.content).group(1) and vote[1]["active"], enumerate(self.votes)))
+        if result == None:
+            return 
+
+        if len(result)>0:
+            print("adding vote")
+            await commands.voting.vote_add(bot, reaction, result[0][0])
+    async def on_reaction_remove(self, reaction, user):
+        # no reacting to own reactions
+        if user == self.user:
+            return
+
+        title = re.compile("\*\*(.*)\*\*")
+        result = list(filter(lambda vote: vote[1]['title'] == title.search(reaction.message.content).group(1) and vote[1]["active"], enumerate(self.votes)))
+        if result == None:
+            return 
+
+        if len(result)>0:
+            print("adding vote")
+            await commands.voting.vote_remove(bot, reaction, result[0][0])
 
     # message event
     async def on_message(self, message):
@@ -27,17 +57,9 @@ class RWTHufflepuffy(discord.Client):
             return
 
         if message.content.startswith('$hello'):
-            author = str(message.author).split("#")
-
-            user = discord.utils.get(
-                message.channel.members, name=author[0], discriminator=author[1])
-            await message.channel.send(f'Hello {user.mention} !')
+            await message.channel.send(f'Hello {message.author.mention} !')
 
         if message.content.startswith('$feature'):
-            # create a mongodb connection
-
-            print(self.mongo.list_database_names())
-
             # send to command handler
             await commands.feat_req.handle_feat(self.mongo, message)
             print(message.content)
