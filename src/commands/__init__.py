@@ -4,4 +4,4 @@ from . import help
 from . import welcome
 from . import role
 
-__all__ = [ "feat_req", "voting", "help" ]
+__all__ = [ "feat_req", "voting", "help", "role", "welcome"]
