@@ -20,7 +20,7 @@ class RWTHufflepuffy(discord.Client):
         self.votes = []
         self.mongo = pymongo.MongoClient(mongoUri, port=47410)
 
-        await client.change_presence(activity=discord.Game(name='with fire'))
+        await self.change_presence(activity=discord.Game(name='with fire'))
         print(self.mongo)
         print(f'\nLogged on as {self.user}!')
 
