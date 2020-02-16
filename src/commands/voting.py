@@ -53,10 +53,10 @@ async def vote_handler(bot: any, message: any):
 
                 # no active votes
                 if len(ongoing) == 0:
-                    response = f"**VOTE - NONE FOUND**\nThere are no active votes"
+                    response = f"**:x: VOTE - NONE FOUND**\nThere are no active votes"
                 # list active votes
                 else:
-                    response = f"**VOTE - NOT FOUND**\nThat Doesn't seem to be a vote, here's a list of currently ongoing votes\n```asciidoc\n{votelist}\n```"
+                    response = f"**:x: VOTE - NOT FOUND**\nThat Doesn't seem to be a vote, here's a list of currently ongoing votes\n```asciidoc\n{votelist}\n```"
                 await message.channel.send(response)
 
             # there is a matching vote, get results and end it
@@ -66,9 +66,9 @@ async def vote_handler(bot: any, message: any):
 
         # wrong action
         else:
-            await message.channel.send(f"**VOTE - WRONG ACTION**\n{message.author.mention} -- `{command[1]}` is not a valid action for the command `{command[0]}` ")
+            await message.channel.send(f"**:x: VOTE - WRONG ACTION**\n{message.author.mention} -- `{command[1]}` is not a valid action for the command `{command[0]}` ")
     except Exception as e:
-        await message.channel.send(f"**VOTE**\nHey {devRole.mention} There was an error.\n```\n{e}\n```")
+        await message.channel.send(f"**:x: VOTE**\nHey {devRole.mention} There was an error.\n```\n{e}\n```")
 
 
 # create vote
@@ -78,10 +78,10 @@ async def vote_create(bot: any, message: any, command: list):
 
     # ERROR
     if vote == 1:
-        await message.channel.send("**VOTE - NOT ENOUGH OPTIONS**\nVote is invalid, please give at least two options.")
+        await message.channel.send("**:x: VOTE - NOT ENOUGH OPTIONS**\nVote is invalid, please give at least two options.")
         return
     elif vote ==2:
-        await message.channel.send("**VOTE - TOO MANY OPTIONS**\nVote is invalid, please use no more than 11 options.")
+        await message.channel.send("**:x: VOTE - TOO MANY OPTIONS**\nVote is invalid, please use no more than 11 options.")
         return
     
     msg = f'**VOTE STARTED BY {message.autho.mention}**\n**{vote["title"]}**\n{vote["message"]}'
