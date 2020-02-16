@@ -83,7 +83,7 @@ class RWTHufflepuffy(discord.Client):
 
         # handle the $help command
         elif message.content.startswith("$help"):
-            pass
+            commands.help.help_handler(bot, message)
 
 
 

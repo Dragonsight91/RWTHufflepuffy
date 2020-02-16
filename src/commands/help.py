@@ -1,4 +1,5 @@
-import commands
+
+# handle help requests
 async def help_handler(bot, message):
     msg = str(message.content).split(" ")
     command = msg[0:2]
