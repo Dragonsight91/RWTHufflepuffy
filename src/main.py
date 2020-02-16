@@ -20,9 +20,12 @@ class RWTHufflepuffy(discord.Client):
         self.votes = []
         self.mongo = pymongo.MongoClient(mongoUri, port=47410)
 
+        await client.change_presence(activity=discord.Game(name='with fire'))
         print(self.mongo)
         print(f'\nLogged on as {self.user}!')
 
+
+    # reaction added to message
     async def on_reaction_add(self, reaction, user):
         # no reacting to own reactions
         if user == self.user:
@@ -35,20 +38,24 @@ class RWTHufflepuffy(discord.Client):
 
         if len(result)>0:
             print("adding vote")
-            await commands.voting.vote_add(bot, reaction, result[0][0])
+            await commands.voting.vote_edit(bot, reaction, result[0][0], True)
+
+    
+    # reaction removed from message
     async def on_reaction_remove(self, reaction, user):
         # no reacting to own reactions
         if user == self.user:
             return
-
+        # find the vote
         title = re.compile("\*\*(.*)\*\*")
         result = list(filter(lambda vote: vote[1]['title'] == title.search(reaction.message.content).group(1) and vote[1]["active"], enumerate(self.votes)))
+
+        # use vote, or return on None
         if result == None:
             return 
-
         if len(result)>0:
             print("adding vote")
-            await commands.voting.vote_remove(bot, reaction, result[0][0])
+            await commands.voting.vote_edit(bot, reaction, result[0][0], False)
 
     # message event
     async def on_message(self, message):
@@ -56,18 +63,26 @@ class RWTHufflepuffy(discord.Client):
         if message.author == self.user:
             return
 
+        # handle the $hello command
         if message.content.startswith('$hello'):
             await message.channel.send(f'Hello {message.author.mention} !')
 
-        if message.content.startswith('$feature'):
+        # handle the $feature command
+        elif message.content.startswith('$feature'):
             # send to command handler
             await commands.feat_req.handle_feat(self.mongo, message)
             print(message.content)
 
-        if message.content.startswith('$vote'):
+        # handle the $vote command
+        elif message.content.startswith('$vote'):
             await commands.voting.vote_handler(message, self)
 
-        if message.content.startswith("$study"):
+        # handle $study command
+        elif message.content.startswith("$welcome"):
+            pass
+
+        # handle the $help command
+        elif message.content.startswith("$help"):
             pass
 
 

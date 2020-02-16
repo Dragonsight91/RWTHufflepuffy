@@ -4,7 +4,7 @@ import re
 # handle all voting command stuff
 
 
-async def vote_handler(message, bot):
+async def vote_handler(message: any, bot: any):
     msg = str(message.content).split(" ")
     command = msg[0:2] + [" ".join(msg[2:])]
     print(command)
@@ -13,37 +13,47 @@ async def vote_handler(message, bot):
     pattern = re.compile("\:(.*)\:")
 
     try:
+        # create vote
         if command[1] == "create":
             await vote_create(bot, message, command)
-            
-        elif command[1] == "end":
-            result = list(filter(lambda vote: vote[1]['title'] == command[2] and vote[1]["active"], enumerate(bot.votes)))
-            print(result)
 
+        # end vote
+        elif command[1] == "end":
+            # try to get the vote to end
+            result = list(filter(
+                lambda vote: vote[1]['title'] == command[2] and vote[1]["active"], enumerate(bot.votes)))
+
+            # there are no ongoing votes
             if result == None or len(result) <= 0:
+
+                # create list of ongoing votes
                 ongoing = list(filter(lambda vote: vote["active"], bot.votes))
-                
                 votelist = ""
                 for i in ongoing:
                     votelist += f"- {i['title']}\n"
+
+                # no active votes
                 if len(ongoing) == 0:
                     response = f"There are no active votes"
+                # list active votes
                 else:
                     response = f"That Doesn't seem to be a vote, here's a list of currently ongoing votes\n```asciidoc\n{votelist}\n```"
-                await message.channel.send(response) 
+                await message.channel.send(response)
 
-            if len(result)>0:
-                print("getting results")
+            # there is a matching vote, get results and end it
+            if len(result) > 0:
                 response = await vote_end(bot, result[0][0])
                 await message.channel.send(response)
+
+        # wrong action
         else:
             await message.channel.send(f"{message.author.mention} -- `{command[1]}` is not a valid action for the command `{command[0]}` ")
     except Exception as e:
         await message.channel.send(f"hey {devRole.mention} There was an error.\n```\n{e}\n```")
 
 
-# put vote into DB
-async def vote_create(bot, message, command):
+# create vote
+async def vote_create(bot: any, message: any, command: list):
     # create vote entry
     vote = await vote_compile(command[2], message)
 
@@ -52,33 +62,41 @@ async def vote_create(bot, message, command):
     vote["discMsg"] = sent
     bot.votes.append(vote)
 
+    # add all response options to vote
     for i in range(len(vote["options"])):
         emoji = await get_emoji(len(vote["options"]), i)
         await sent.add_reaction(emoji["emoji"])
 
 
-async def vote_add(bot, reaction, voteIdx):
+# edit user vote
+async def vote_edit(bot: any, reaction: any, voteIdx: int, mode:bool):
     index = await emoji_to_id(reaction.emoji)
+    if index == None:
+        return
     message = reaction.message.content
-    bot.votes[voteIdx]["options"][index]["votes"] += 1
-    
+
+    # add or remove vote
+    if mode:
+        bot.votes[voteIdx]["options"][index]["votes"] += 1
+    else:
+        bot.votes[voteIdx]["options"][index]["votes"] -= 1
+
     print(bot.votes[voteIdx])
 
-async def vote_remove(bot, reaction, voteIdx):
-    index = await emoji_to_id(reaction.emoji)
-    message = reaction.message.content
-    bot.votes[voteIdx]["options"][index]["votes"] -= 1
-    
-    print(bot.votes[voteIdx])
 
-async def vote_end(bot, voteIdx):
+# end vote
+async def vote_end(bot: any, voteIdx: int):
+    # get results and deactivate vote
     results = bot.votes[voteIdx]["options"]
     bot.votes[voteIdx]["active"] = False
+
+    # calculate amount of votes
     total = 0
     for x in results:
         total += x["votes"]
     print(total)
 
+    # create the response message
     message = f"**VOTE ENDED -- Total Votes: {total}**\n ```asciidoc\n==== RESULTS ====\n{bot.votes[voteIdx]['title']}\n"
     for i in results:
         if total <= 0 or i["votes"] <= 0:
@@ -90,17 +108,19 @@ async def vote_end(bot, voteIdx):
     message += "```"
     return message
 
+
 # create a vote dict
-async def vote_compile(string: str, msg):
+async def vote_compile(string: str):
+    # split the strings
     args = string.split(";")
     options = args[1].split(",")
-    print(options)
+
+    # vote dict template
     vote = {
         "title": args[0],
         "options": [],
         "message": "",
-        "active": True,
-        "discMsg":msg
+        "active": True
     }
 
     # are we in special shit territory??
@@ -120,9 +140,9 @@ async def vote_compile(string: str, msg):
         vote["message"] += f"{emoji['name']}` -- {elem}`\n\n"
 
     return vote
-# get the appropriate emoji
 
 
+# get the appropriate emoji for the id
 async def get_emoji(length: int, index: int):
     # vote types
     yes_no = [
@@ -149,6 +169,8 @@ async def get_emoji(length: int, index: int):
     else:
         return number[index]
 
+# get the id of an emoji
+
 
 async def emoji_to_id(emoji: str):
     emoji_dict = {
@@ -169,4 +191,7 @@ async def emoji_to_id(emoji: str):
         "9️⃣": 9,
         "🔟": 10
     }
-    return emoji_dict[emoji]
+    try:
+        return emoji_dict[emoji]
+    except Exception:
+        return None
