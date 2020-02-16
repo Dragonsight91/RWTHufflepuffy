@@ -3,6 +3,7 @@ import discord
 import pymongo
 import re
 from urllib.parse import quote
+import os
 
 # import all action handlers
 import commands
@@ -89,4 +90,4 @@ class RWTHufflepuffy(discord.Client):
 
 
 bot = RWTHufflepuffy()
-bot.run("Njc4MTg0MzMwOTY2ODU5Nzg2.XkfTLg.oxem-VXXxsRMrJmzST8lQpzl_A8")
+bot.run(os.environ['DISCORD_KEY'])
