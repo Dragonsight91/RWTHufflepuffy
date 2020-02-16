@@ -16,7 +16,20 @@ async def vote_handler(message: any, bot: any):
         # create vote
         if command[1] == "create":
             await vote_create(bot, message, command)
+        if command [1] == "list":
+            # create list of ongoing votes
+            ongoing = list(filter(lambda vote: vote["active"], bot.votes))
+            votelist = ""
+            for i in ongoing:
+                votelist += f"- {i['title']}\n"
 
+            # no active votes
+            if len(ongoing) == 0:
+                response = f"There are no active votes"
+            # list active votes
+            else:
+                response = f"\n```asciidoc\n==== ONGOING VOTES ====\n{votelist}\n```"
+            await message.channel.send(response)
         # end vote
         elif command[1] == "end":
             # try to get the vote to end
