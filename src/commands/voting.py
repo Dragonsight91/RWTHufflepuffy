@@ -20,7 +20,7 @@ async def vote_handler(bot: any, message: any):
             # is there a vote with that title?
             result = list(filter(lambda vote: vote[1]['title'] == command[2] and vote[1]["active"], enumerate(bot.votes)))
             if len(result) >= 1:
-                await message.channel.send(f"**:x: VOTE - EXISTS**\n{message.author.mention} That Title has already been used in an active vote, please use another title or ende the old vote.")
+                await message.channel.send(f"**:x: VOTE - EXISTS**\n{message.author.mention} That Title has already been used in an active vote, please use another title or end the old vote.")
                 return
             await vote_create(bot, message, command)
             
@@ -146,6 +146,9 @@ async def vote_end(bot: any, voteIdx: int):
 async def vote_compile(string: str):
     # split the strings
     args = string.split(";")
+    if len(args) <= 1:
+        return 3
+    
     options = args[1].split(",")
 
     # are we in special shit territory??
@@ -153,8 +156,7 @@ async def vote_compile(string: str):
         return 1
     elif len(options) > 11:
         return 2
-    elif len(args) <= 1:
-        return 3
+    
 
     print(args)
     print(options)
