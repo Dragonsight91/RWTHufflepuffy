@@ -55,7 +55,7 @@ async def vote_handler(message: any, bot: any):
 # create vote
 async def vote_create(bot: any, message: any, command: list):
     # create vote entry
-    vote = await vote_compile(command[2], message)
+    vote = await vote_compile(command[2])
 
     msg = f'**{vote["title"]}**\n{vote["message"]}'
     sent = await message.channel.send(msg)
