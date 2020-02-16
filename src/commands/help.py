@@ -67,5 +67,5 @@ async def feature():
     return response
 
 async def welcome():
-    response = f"** HELP    --    welcome **\n The welcome command can be used like this:\n```asciidoc\n==== USAGE ====\n$welcome {{role_mention}} {{name}}\n- role_mention mentions the role fitting to your study\n- name is the name or nickname you want to be called\n```"
+    response = f"** HELP    --    welcome **\n The welcome command can be used like this:\n```asciidoc\n==== USAGE ====\n$welcome {{role_mention}} {{name}}\n- role_mention @mentions the role fitting to your study\n- name is the name or nickname you want to be called\n```"
     return response
