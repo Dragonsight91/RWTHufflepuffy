@@ -79,7 +79,7 @@ class RWTHufflepuffy(discord.Client):
 
         # handle $study command
         elif message.content.startswith("$welcome"):
-            pass
+            commands.welcome.welcome_handler(bot, message)
 
         # handle the $help command
         elif message.content.startswith("$help"):
