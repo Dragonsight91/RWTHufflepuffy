@@ -1,4 +1,3 @@
-
 # handle help requests
 async def help_handler(bot, message):
     msg = str(message.content).split(" ")
@@ -7,18 +6,25 @@ async def help_handler(bot, message):
 
     try:
         # main help
-        if len(command) < 2 or command[2]=="":
+        if len(command) < 2 or command[1]=="":
             response = await help_main()
         else:
-            pass
+            if command[1] == "vote":
+                response = await voting()
+            if command[1] == "feature":
+                response = await feature()
+            else:
+                response = "** HELP **\n THAT is not a command currently supported.\n you can add a request with `$feature add {text}`"
         await message.channel.send(response)
     except Exception as e:
         await message.channel.send(f"hey {devRole.mention} There was an error.\n```\n{e}\n```")
 
+
+# main help
 async def help_main():
     cList = [
         "- help     ::   sends this message",
-        "- hello    ::   says hello to the sender",
+        "- hello    ::   says hello to the sender (has no special action)",
         "- vote     ::   creates, removes or lists active votes",
         "- feature  ::   submits a feature request to the database",
         "- welcome  ::   gives the sender their study role and nick"
@@ -26,12 +32,34 @@ async def help_main():
 
     comm = ""
     for i in cList:
-        comm += i
-    response = f"** HELP **\n This is a list of currently available commands.To use a command, write `${{command}} {{action}}` To get more information about actions, write `$help {{command}}`.\n```asciidoc\n==== COMMANDS ====\n{comm}\n```"
+        comm += i + "\n"
+    response = f"** HELP **\nThis is a list of currently available commands.\nTo use a command, write `${{command}} {{action}} {{arguments}}`.\nTo get more information about actions and their arguments, write `$help {{command}}`.\n```asciidoc\n==== COMMANDS ====\n{comm}\n```"
     
+    return response
 
+
+# help for vote command
 async def voting():
-    pass
+    alist = [
+        "- list                       :: list all currently active votes",
+        "- create {name};{options}    :: creates a vote  with name {name} and all options separated by comma",
+        "- end {name}                 :: removes the active quote with name {name}"
+    ]
+    comm = ""
+    for i in alist:
+        comm += i + "\n"
+    response = f"** HELP    --    vote **\nThis is a list of actions and their parameters. To use them, write `$vote {{action}} {{arguments}}`.\n```asciidoc\n{comm}\n```"
+    return response
 
+
+# help for feature command
 async def feature():
-    pass
+    alist = [
+        "- add {text}     :: add {text} as feature request to DB",
+        "- purge          :: purge the feature request DB (@Developer Role only)",
+    ]
+    comm = ""
+    for i in alist:
+        comm += i + "\n"
+    response = f"** HELP    --    feature **\nThis is a list of actions and their parameters. To use them, write `$feature {{action}} {{arguments}}`.\n```asciidoc\n{comm}\n```"
+    return response
