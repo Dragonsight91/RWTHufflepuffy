@@ -87,7 +87,9 @@ async def vote_create(bot: any, message: any, command: list):
         await message.channel.send("**:x: VOTE - TOO MANY OPTIONS**\nVote is invalid, please use no more than 11 options.")
         return
     elif vote == 3:
-        await message.channel.send("**:x: VOTE - SYNTAX ERROR**\nThe Vote is invalid, because you did not specify any options")
+        await message.channel.send("**:x: VOTE - SYNTAX ERROR**\nThe Vote is invalid, please separate `name` and `options` with `;` and each option with `,`.")
+        return
+    
     msg = f'**:ballot_box: VOTE STARTED BY {message.author.mention}**\n**{vote["title"]}**\n{vote["message"]}'
     sent = await message.channel.send(msg)
     vote["discMsg"] = sent
