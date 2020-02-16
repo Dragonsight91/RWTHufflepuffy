@@ -15,6 +15,8 @@ async def help_handler(bot, message):
                 response = await feature()
             elif command[1] == "welcome":
                 response = await welcome()
+            elif command[1] == "role":
+                response = await role()
             else:
                 response = "**:x: HELP - NONEXISTENT COMMAND **\n THAT is not a command currently supported.\n You can add a request with `$feature add {text}` or list the available commands with `$help`"
         await message.channel.send(response)
@@ -29,7 +31,8 @@ async def help_main():
         "- hello    ::   says hello to the sender (has no special action)",
         "- vote     ::   creates, removes or lists active votes",
         "- feature  ::   submits a feature request to the database",
-        "- welcome  ::   gives the sender their study role and nickname"
+        "- welcome  ::   gives the sender their study role and nickname",
+        "- role     ::   adds or removes a role from you"
     ]
 
     comm = ""
@@ -67,5 +70,13 @@ async def feature():
     return response
 
 async def welcome():
-    response = f"**:grey_question: HELP    --    welcome **\n The welcome command can be used like this:\n```asciidoc\n==== USAGE ====\n$welcome {{role_mention}} {{name}}\n- role_mention @mentions the role fitting to your study\n- name is the name or nickname you want to be called\n```"
+    response = f"**:grey_question: HELP    --    welcome **\nThe welcome command can be used like this:\n```asciidoc\n==== USAGE ====\n$welcome {{role_mention}} {{name}}\n- role_mention @mentions the role fitting to your study\n- name is the name or nickname you want to be called\n```"
+    return response
+
+async def role():
+    alist = [
+        "- add {role}     :: add the role to yourself",
+        "- remove {role}  :: remove role from yourself"
+    ]
+    response = f"**:grey_question: HELP    --    welcome **\nThis command adds or removes roles. Here is a list of actions and their parameters that this command can use. To use them, write `$role {{action}} {{arguments}}`.\n```asciidoc\n{comm}\n```"
     return response
