@@ -18,7 +18,7 @@ async def vote_handler(bot: any, message: any):
             # is there a vote with that title?
             result = list(filter(lambda vote: vote[1]['title'] == command[2] and vote[1]["active"], enumerate(bot.votes)))
             if len(result) >= 1:
-                await message.channel.send(f"**VOTE - EXISTS**\n{message.author.mention} That Title has already been used in an active vote, please use another title or ende the old vote.")
+                await message.channel.send(f"**:x: VOTE - EXISTS**\n{message.author.mention} That Title has already been used in an active vote, please use another title or ende the old vote.")
             await vote_create(bot, message, command)
             
         # get a list of all ongoing votes
@@ -31,10 +31,10 @@ async def vote_handler(bot: any, message: any):
 
             # no active votes
             if len(ongoing) == 0:
-                response = f"**VOTE - NONE FOUND**\nThere are no active votes"
+                response = f"**:x: VOTE - NONE FOUND**\nThere are no active votes"
             # list active votes
             else:
-                response = f"\n**VOTE - ONGOING**\n```asciidoc\n==== ONGOING VOTES ====\n{votelist}\n```"
+                response = f"\n**:x: VOTE - ONGOING**\n```asciidoc\n==== ONGOING VOTES ====\n{votelist}\n```"
             await message.channel.send(response)
         # end vote
         elif command[1] == "end":
@@ -84,7 +84,7 @@ async def vote_create(bot: any, message: any, command: list):
         await message.channel.send("**:x: VOTE - TOO MANY OPTIONS**\nVote is invalid, please use no more than 11 options.")
         return
     
-    msg = f'**VOTE STARTED BY {message.autho.mention}**\n**{vote["title"]}**\n{vote["message"]}'
+    msg = f'**:ballot_bot: VOTE STARTED BY {message.autho.mention}**\n**{vote["title"]}**\n{vote["message"]}'
     sent = await message.channel.send(msg)
     vote["discMsg"] = sent
     bot.votes.append(vote)
@@ -124,7 +124,7 @@ async def vote_end(bot: any, voteIdx: int):
     print(total)
 
     # create the response message
-    message = f"**VOTE ENDED -- VOTES RECEIVED: {total}**\n```asciidoc\n==== RESULTS ====\n{bot.votes[voteIdx]['title']}\n"
+    message = f"**:no_entry: VOTE ENDED -- VOTES RECEIVED: {total}**\n```asciidoc\n==== RESULTS ====\n{bot.votes[voteIdx]['title']}\n"
     for i in results:
         if total <= 0 or i["votes"] <= 0:
             percent = 0

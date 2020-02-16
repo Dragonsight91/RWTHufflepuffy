@@ -14,7 +14,7 @@ async def handle_feat(mongo, message):
             else:
                 await feat_add(mongo, command[2])
                 # send a response
-                response = f"**FEATURE - ADD **\nInserted The Following into the Feature Requests:\n```asciidoc\n=== FEATURE REQUEST ===\n- {command[2]}\n```"
+                response = f"**:white_check_mark: FEATURE - ADD **\nInserted The Following into the Feature Requests:\n```asciidoc\n=== FEATURE REQUEST ===\n- {command[2]}\n```"
             await message.channel.send(response)
 
         # purge DB
@@ -23,10 +23,10 @@ async def handle_feat(mongo, message):
             if devRole in message.author.roles:
                 # purge feature request DB
                 await purge_feat(mongo)
-                await message.channel.send(f"**FEATURE - PURGE **\n{message.author.mention} Feature Request Database Purged.")
+                await message.channel.send(f"**:white_check_mark: FEATURE - PURGE **\n{message.author.mention} Feature Request Database Purged.")
             else:
                 # nice try, better luck next time
-                await message.channel.send(f"**:x: FEATURE - MISSING ROLE **\nYOU SHALL NOT PASS {message.author.mention}. \n Jokes aside, you gotta be {devRole.mention} to use that.")
+                await message.channel.send(f"**:no_entry: FEATURE - MISSING ROLE **\nYOU SHALL NOT PASS {message.author.mention}. \n Jokes aside, you gotta be {devRole.mention} to use that.")
         else:
             await message.channel.send(f"**:x: FEATURE - WRONG ACTION **\n{message.author.mention} -- `{command[1]}` is not a valid action for the command `{command[0]}` ")
     except Exception as e:

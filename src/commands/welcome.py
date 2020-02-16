@@ -16,7 +16,7 @@ async def welcome_handler(bot, message):
             await member.add_roles(role)
             await member.edit(nick=nick)
 
-            response = f"**WELCOME**\nWelcome to RWTHufflepuff, {member.mention}. You have now been registered as {role.mention} Student.\nHave fun."
+            response = f"**:hibiscus: WELCOME :hibiscus:**\nWelcome to RWTHufflepuff, {member.mention}. You have now been registered as {role.mention} Student.\nHave fun."
         await message.channel.send(response)
 
     except Exception as e:
