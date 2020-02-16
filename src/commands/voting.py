@@ -146,6 +146,16 @@ async def vote_compile(string: str):
     args = string.split(";")
     options = args[1].split(",")
 
+    # are we in special shit territory??
+    if len(options) < 2:
+        return 1
+    elif len(options) > 11:
+        return 2
+    elif len(args) <= 1:
+        return 3
+
+    print(args)
+    print(options)
     # vote dict template
     vote = {
         "title": args[0],
@@ -154,13 +164,6 @@ async def vote_compile(string: str):
         "active": True
     }
 
-    # are we in special shit territory??
-    if len(options) < 2:
-        return 1
-    elif len(options) > 11:
-        return 2
-    elif len(args) <= 1:
-        return 3
     # compile vote object
     for i, elem in enumerate(options):
         option = {
