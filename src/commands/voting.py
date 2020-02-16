@@ -150,7 +150,7 @@ async def vote_compile(string: str):
         return 3
     
     options = args[1].split(",")
-    if options[0] == "":
+    if args[0] == "":
         return 3
     # are we in special shit territory??
     if len(options) < 2:
