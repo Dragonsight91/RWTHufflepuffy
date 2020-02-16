@@ -84,7 +84,7 @@ async def vote_create(bot: any, message: any, command: list):
         await message.channel.send("**:x: VOTE - TOO MANY OPTIONS**\nVote is invalid, please use no more than 11 options.")
         return
     
-    msg = f'**:ballot_bot: VOTE STARTED BY {message.author.mention}**\n**{vote["title"]}**\n{vote["message"]}'
+    msg = f'**:ballot_box: VOTE STARTED BY {message.author.mention}**\n**{vote["title"]}**\n{vote["message"]}'
     sent = await message.channel.send(msg)
     vote["discMsg"] = sent
     bot.votes.append(vote)
