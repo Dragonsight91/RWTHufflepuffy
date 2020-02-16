@@ -1,65 +1,75 @@
-# imports
+# external imports
 import discord
 import pymongo
 import re
 from urllib.parse import quote
 import os
 
-# import all action handlers
+# import all internal things
 import commands
 
-
+# The Bot
 class RWTHufflepuffy(discord.Client):
 
     # bot logon event
     async def on_ready(self):
+
+        # get all variables and create DB connection
         dbuser = os.environ["MONGO_USER"]
         dbpass = os.environ["MONGO_PASS"]
         dburl = os.environ["MONGO_URL"]
         mongoUri = f"mongodb+srv://{dbuser}:{dbpass}@{dburl}"
         
+        # save all necessary things in the bot
         self.votes = []
         self.mongo = pymongo.MongoClient(mongoUri, port=47410)
 
+        # change bot's status
         await self.change_presence(activity=discord.Game(name='with fire'))
-        print(self.mongo)
-        print(f'\nLogged on as {self.user}!')
 
 
     # reaction added to message
     async def on_reaction_add(self, reaction, user):
-        # no reacting to own reactions
+
+        # no reacting to own reactions, that'd create WEIRD loops
         if user == self.user:
             return
 
+        # is it a vote, get the title
         title = re.compile("\*\*(.*)\*\*")
         result = list(filter(lambda vote: vote[1]['title'] == title.findall(reaction.message.content)[1] and vote[1]["active"], enumerate(self.votes)))
+        
+        # well it's not a vote
         if result == None:
             return 
 
-        if len(result)>0:
-            print("adding vote")
+        # OH it's a vote, change the vote count
+        elif len(result)>0:
             await commands.voting.vote_edit(bot, reaction, result[0][0], True)
 
     
     # reaction removed from message
     async def on_reaction_remove(self, reaction, user):
+        
         # no reacting to own reactions
         if user == self.user:
             return
+
         # find the vote
         title = re.compile("\*\*(.*)\*\*")
         result = list(filter(lambda vote: vote[1]['title'] == title.findall(reaction.message.content)[1] and vote[1]["active"], enumerate(self.votes)))
 
-        # use vote, or return on None
+        # NOT A VOTE, let#s do something else
         if result == None:
             return 
-        if len(result)>0:
-            print("adding vote")
+
+        # it's a vote, alright
+        elif len(result)>0:
             await commands.voting.vote_edit(bot, reaction, result[0][0], False)
 
     # message event
     async def on_message(self, message):
+
         # no self-replies
         if message.author == self.user:
             return
@@ -72,7 +82,6 @@ class RWTHufflepuffy(discord.Client):
         elif message.content.startswith('$feature'):
             # send to command handler
             await commands.feat_req.handle_feat(self.mongo, message)
-            print(message.content)
 
         # handle the $vote command
         elif message.content.startswith('$vote'):
@@ -92,6 +101,6 @@ class RWTHufflepuffy(discord.Client):
 
 
 
-
+# START DAT SHIT
 bot = RWTHufflepuffy()
 bot.run(os.environ['DISCORD_KEY'])

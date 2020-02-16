@@ -7,7 +7,6 @@ import re
 async def vote_handler(bot: any, message: any):
     msg = str(message.content).split(" ")
     command = msg[0:2] + [" ".join(msg[2:])]
-    print(command)
 
     devRole = discord.utils.get(message.guild.roles, name="Developer")
     pattern = re.compile("\:(.*)\:")
@@ -114,8 +113,6 @@ async def vote_edit(bot: any, reaction: any, voteIdx: int, mode:bool):
     else:
         bot.votes[voteIdx]["options"][index]["votes"] -= 1
 
-    print(bot.votes[voteIdx])
-
 
 # end vote
 async def vote_end(bot: any, voteIdx: int):
@@ -127,7 +124,6 @@ async def vote_end(bot: any, voteIdx: int):
     total = 0
     for x in results:
         total += x["votes"]
-    print(total)
 
     # create the response message
     message = f"**:negative_squared_cross_mark: VOTE ENDED -- VOTES RECEIVED: {total}**\n```asciidoc\n==== RESULTS ====\n{bot.votes[voteIdx]['title']}\n"
@@ -160,8 +156,6 @@ async def vote_compile(string: str):
         return 2
     
 
-    print(args)
-    print(options)
     # vote dict template
     vote = {
         "title": args[0],
@@ -201,7 +195,7 @@ async def get_emoji(length: int, index: int):
         {"name": ":seven:", "emoji": "7️⃣"},
         {"name": ":eight:", "emoji": "8️⃣"},
         {"name": ":nine:", "emoji": "9️⃣"},
-        {"name": ":ten:", "emoji": "🔟"}
+        {"name": ":keycap_ten:", "emoji": "🔟"}
     ]
 
     # return correct emoji

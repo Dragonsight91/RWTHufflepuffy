@@ -1,4 +1,0 @@
-[submodule "src/actions/expandable-quotes-script"]
-	path = src/expandable-quotes-script
-	url = git@github.com:Dragonsight91/expandable-quotes-script.git
-	branch = master
