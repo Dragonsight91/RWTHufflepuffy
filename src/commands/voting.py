@@ -124,7 +124,7 @@ async def vote_end(bot: any, voteIdx: int):
     print(total)
 
     # create the response message
-    message = f"**:no_entry: VOTE ENDED -- VOTES RECEIVED: {total}**\n```asciidoc\n==== RESULTS ====\n{bot.votes[voteIdx]['title']}\n"
+    message = f"**:negative_squared_cross_mark: VOTE ENDED -- VOTES RECEIVED: {total}**\n```asciidoc\n==== RESULTS ====\n{bot.votes[voteIdx]['title']}\n"
     for i in results:
         if total <= 0 or i["votes"] <= 0:
             percent = 0
