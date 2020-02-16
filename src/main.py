@@ -13,9 +13,9 @@ class RWTHufflepuffy(discord.Client):
 
     # bot logon event
     async def on_ready(self):
-        dbuser = "rwthufflepuffy"
-        dbpass = "GwoGykaZLbFonSQZ"
-        dburl = "rwthufflepuffy-wxfsh.gcp.mongodb.net/test?retryWrites=true&w=majority"
+        dbuser = os.environ["MONGO_USER"]
+        dbpass = os.environ["MONGO_PASS"]
+        dburl = os.environ["MONGO_URL"]
         mongoUri = f"mongodb+srv://{dbuser}:{dbpass}@{dburl}"
         
         self.votes = []
