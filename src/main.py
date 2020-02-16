@@ -33,7 +33,7 @@ class RWTHufflepuffy(discord.Client):
             return
 
         title = re.compile("\*\*(.*)\*\*")
-        result = list(filter(lambda vote: vote[1]['title'] == title.search(reaction.message.content).group(1) and vote[1]["active"], enumerate(self.votes)))
+        result = list(filter(lambda vote: vote[1]['title'] == title.findall(reaction.message.content)[1] and vote[1]["active"], enumerate(self.votes)))
         if result == None:
             return 
 
@@ -49,7 +49,7 @@ class RWTHufflepuffy(discord.Client):
             return
         # find the vote
         title = re.compile("\*\*(.*)\*\*")
-        result = list(filter(lambda vote: vote[1]['title'] == title.search(reaction.message.content).group(1) and vote[1]["active"], enumerate(self.votes)))
+        result = list(filter(lambda vote: vote[1]['title'] == title.findall(reaction.message.content)[1] and vote[1]["active"], enumerate(self.votes)))
 
         # use vote, or return on None
         if result == None:
