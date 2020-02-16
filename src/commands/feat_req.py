@@ -10,11 +10,11 @@ async def handle_feat(mongo, message):
         # add feature request
         if command[1] == "add":
             if len(command)<3 or command[2] == "":
-                response = f"** FEATURE - MISSING PARAMETER {{text}}**\nPlease specify the text you wish to add as feature."
+                response = f"**FEATURE - MISSING PARAMETER {{text}}**\nPlease specify the text you wish to add as feature."
             else:
                 await feat_add(mongo, command[2])
                 # send a response
-                response = f"** FEATURE - ADD **\nInserted The Following into the Feature Requests:\n```asciidoc\n=== FEATURE REQUEST ===\n- {command[2]}\n```"
+                response = f"**FEATURE - ADD **\nInserted The Following into the Feature Requests:\n```asciidoc\n=== FEATURE REQUEST ===\n- {command[2]}\n```"
             await message.channel.send(response)
 
         # purge DB
@@ -23,15 +23,15 @@ async def handle_feat(mongo, message):
             if devRole in message.author.roles:
                 # purge feature request DB
                 await purge_feat(mongo)
-                await message.channel.send(f"** FEATURE - PURGE **\n{message.author.mention} Feature Request Database Purged.")
+                await message.channel.send(f"**FEATURE - PURGE **\n{message.author.mention} Feature Request Database Purged.")
             else:
                 # nice try, better luck next time
-                await message.channel.send(f"** FEATURE - MISSING ROLE **\nYOU SHALL NOT PASS {message.author.mention}. \n Jokes aside, you gotta be {devRole.mention} to use that.")
+                await message.channel.send(f"**FEATURE - MISSING ROLE **\nYOU SHALL NOT PASS {message.author.mention}. \n Jokes aside, you gotta be {devRole.mention} to use that.")
         else:
-            await message.channel.send(f"** FEATURE - WRONG ACTION **\n{message.author.mention} -- `{command[1]}` is not a valid action for the command `{command[0]}` ")
+            await message.channel.send(f"**FEATURE - WRONG ACTION **\n{message.author.mention} -- `{command[1]}` is not a valid action for the command `{command[0]}` ")
     except Exception as e:
         print(e)
-        await message.channel.send(f"** FEATURE - ERROR **\nhey {devRole.mention} There was an error.\n```\n{e}\n```")
+        await message.channel.send(f"**FEATURE - ERROR **\nHey {devRole.mention} There was an error.\n```\n{e}\n```")
     
 
 # add feature request
