@@ -2,12 +2,24 @@ import discord
 
 # handle the welcome command
 async def welcome_handler(bot, message):
-    msg = str(message.content).split(" ")
-    command = msg[0] + [" ".join(msg[1:])]
+    command = list(filter(lambda x : x!= "" ,str(message.content).split(" ")))
     devRole = message.guild.get_role(678262267279572993)
     try:
+    
         member = message.author
         server = message.author.guild
-        print(message.role_mentions[0])
+        if len(message.role_mentions) == 0 or len(command) < 3:
+            response = "Oops, something went wrong. Please mention the Role and your Name.\nThe command can be used like this: `$welcome {role} {name}`"
+        else:
+            role = message.role_mentions
+            await member.add_roles(role[0])
+            
+            for x in command:
+                print(x)
+            nick = command[2]
+            await member.edit(nick=command[2])
+            print(member.display_name)
+        # await message.channel.send(response)
+
     except Exception as e:
         await message.channel.send(f"hey {devRole.mention} There was an error.\n```\n{e}\n```")
