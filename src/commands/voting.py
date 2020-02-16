@@ -22,7 +22,7 @@ async def vote_handler(message: any, bot: any):
             await vote_create(bot, message, command)
             
         # get a list of all ongoing votes
-        if command [1] == "list":
+        elif command [1] == "list":
             # create list of ongoing votes
             ongoing = list(filter(lambda vote: vote["active"], bot.votes))
             votelist = ""
@@ -75,7 +75,8 @@ async def vote_handler(message: any, bot: any):
 async def vote_create(bot: any, message: any, command: list):
     # create vote entry
     vote = await vote_compile(command[2])
-
+    if vote == None:
+        message.channel.send("** VOTE **\nVote is invalid, please give at least two options.")
     msg = f'**{vote["title"]}**\n{vote["message"]}'
     sent = await message.channel.send(msg)
     vote["discMsg"] = sent
@@ -143,7 +144,9 @@ async def vote_compile(string: str):
     }
 
     # are we in special shit territory??
-    if len(options) <= 2:
+    if len(options) < 2:
+        return None
+    elif len(options) == 2:
         options = ["yes", "no"]
     elif len(options) > 11:
         return "Please use no more than 10 vote options."
