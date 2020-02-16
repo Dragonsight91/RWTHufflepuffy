@@ -76,7 +76,7 @@ async def vote_create(bot: any, message: any, command: list):
     # create vote entry
     vote = await vote_compile(command[2])
     if vote == None:
-        message.channel.send("** VOTE **\nVote is invalid, please give at least two options.")
+        await message.channel.send("** VOTE **\nVote is invalid, please give at least two options.")
         return
     msg = f'**{vote["title"]}**\n{vote["message"]}'
     sent = await message.channel.send(msg)
