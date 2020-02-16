@@ -11,8 +11,10 @@ async def help_handler(bot, message):
         else:
             if command[1] == "vote":
                 response = await voting()
-            if command[1] == "feature":
+            elif command[1] == "feature":
                 response = await feature()
+            elif command[1] == "welcome":
+                response = await welcome()
             else:
                 response = "** HELP **\n THAT is not a command currently supported.\n you can add a request with `$feature add {text}`"
         await message.channel.send(response)
@@ -27,7 +29,7 @@ async def help_main():
         "- hello    ::   says hello to the sender (has no special action)",
         "- vote     ::   creates, removes or lists active votes",
         "- feature  ::   submits a feature request to the database",
-        "- welcome  ::   gives the sender their study role and nick"
+        "- welcome  ::   gives the sender their study role and nickname"
     ]
 
     comm = ""
@@ -62,4 +64,8 @@ async def feature():
     for i in alist:
         comm += i + "\n"
     response = f"** HELP    --    feature **\nThis is a list of actions and their parameters. To use them, write `$feature {{action}} {{arguments}}`.\n```asciidoc\n{comm}\n```"
+    return response
+
+async def welcome():
+    response = f"** HELP    --    welcome **\n The welcome command can be used like this:\n```asciidoc\n==== USAGE ====\n$welcome {{role_mention}} {{Name}}\n```"
     return response
