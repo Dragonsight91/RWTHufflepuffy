@@ -78,5 +78,8 @@ async def role():
         "- add {role}     :: add the role to yourself",
         "- remove {role}  :: remove role from yourself"
     ]
+    comm = ""
+    for i in alist:
+        comm += i + "\n"
     response = f"**:grey_question: HELP    --    welcome **\nThis command adds or removes roles. Here is a list of actions and their parameters that this command can use. To use them, write `$role {{action}} {{arguments}}`.\n```asciidoc\n{comm}\n```"
     return response
