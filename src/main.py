@@ -76,15 +76,15 @@ class RWTHufflepuffy(discord.Client):
 
         # handle the $vote command
         elif message.content.startswith('$vote'):
-            await commands.voting.vote_handler(message, self)
+            await commands.voting.vote_handler(self, message)
 
         # handle $welcome command (initial join)
         elif message.content.startswith("$welcome"):
-            await commands.welcome.welcome_handler(bot, message)
+            await commands.welcome.welcome_handler(self, message)
 
         # handle $role command
         elif message.content.startswith("$role"):
-            pass
+            await commands.role.role_handler(self, message)
 
         # handle the $help command
         elif message.content.startswith("$help"):

@@ -4,7 +4,7 @@ import re
 # handle all voting command stuff
 
 
-async def vote_handler(message: any, bot: any):
+async def vote_handler(bot: any, message: any):
     msg = str(message.content).split(" ")
     command = msg[0:2] + [" ".join(msg[2:])]
     print(command)
