@@ -16,10 +16,10 @@ async def help_handler(bot, message):
             elif command[1] == "welcome":
                 response = await welcome()
             else:
-                response = "** HELP **\n THAT is not a command currently supported.\n you can add a request with `$feature add {text}`"
+                response = "** HELP - NONEXISTENT COMMAND **\n THAT is not a command currently supported.\n You can add a request with `$feature add {text}` or list the available commands with `$help`"
         await message.channel.send(response)
     except Exception as e:
-        await message.channel.send(f"hey {devRole.mention} There was an error.\n```\n{e}\n```")
+        await message.channel.send(f"** HELP - ERROR **\nHey {devRole.mention} There was an error.\n```\n{e}\n```")
 
 
 # main help
