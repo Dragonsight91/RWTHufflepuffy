@@ -148,10 +148,11 @@ async def vote_compile(string: str):
     args = string.split(";")
     if len(args) <= 1:
         return 3
-    
-    options = args[1].split(",")
-    if args[0] == "":
+    elif len(args[0]) == 0:
         return 3
+
+    options = args[1].split(",")
+    
     # are we in special shit territory??
     if len(options) < 2:
         return 1
