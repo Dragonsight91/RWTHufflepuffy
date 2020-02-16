@@ -15,7 +15,13 @@ async def vote_handler(message: any, bot: any):
     try:
         # create vote
         if command[1] == "create":
+            # try to get the vote to end
+            result = list(filter(lambda vote: vote[1]['title'] == command[2] and vote[1]["active"], enumerate(bot.votes)))
+            if len(result) >= 1:
+                await message.channel.send(f"{message.author.mention} That Title has already been used in an active vote, please use another title or ende the old vote.")
             await vote_create(bot, message, command)
+            
+        # get a list of all ongoing votes
         if command [1] == "list":
             # create list of ongoing votes
             ongoing = list(filter(lambda vote: vote["active"], bot.votes))
