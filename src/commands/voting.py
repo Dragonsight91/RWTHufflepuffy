@@ -13,12 +13,15 @@ async def vote_handler(bot: any, message: any):
     pattern = re.compile("\:(.*)\:")
 
     try:
+        if len(command) < 3:
+            await message.channel.send("**")
         # create vote
-        if command[1] == "create":
+        elif command[1] == "create":
             # is there a vote with that title?
             result = list(filter(lambda vote: vote[1]['title'] == command[2] and vote[1]["active"], enumerate(bot.votes)))
             if len(result) >= 1:
                 await message.channel.send(f"**:x: VOTE - EXISTS**\n{message.author.mention} That Title has already been used in an active vote, please use another title or ende the old vote.")
+                return
             await vote_create(bot, message, command)
             
         # get a list of all ongoing votes
@@ -83,8 +86,9 @@ async def vote_create(bot: any, message: any, command: list):
     elif vote ==2:
         await message.channel.send("**:x: VOTE - TOO MANY OPTIONS**\nVote is invalid, please use no more than 11 options.")
         return
-    
-    msg = f':ballot_box: **VOTE STARTED BY {message.author.mention}**\n**{vote["title"]}**\n{vote["message"]}'
+    elif vote == 3:
+        await message.channel.send("**:x: VOTE - SYNTAX ERROR**\nThe Vote is invalid, because you did not specify any options")
+    msg = f'**:ballot_box: VOTE STARTED BY {message.author.mention}**\n**{vote["title"]}**\n{vote["message"]}'
     sent = await message.channel.send(msg)
     vote["discMsg"] = sent
     bot.votes.append(vote)
@@ -155,7 +159,8 @@ async def vote_compile(string: str):
         return 1
     elif len(options) > 11:
         return 2
-
+    elif len(args) <= 1:
+        return 3
     # compile vote object
     for i, elem in enumerate(options):
         option = {
