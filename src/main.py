@@ -7,6 +7,7 @@ import os
 
 # import all internal things
 import commands
+import extra
 
 # The Bot
 class RWTHufflepuffy(discord.Client):
@@ -23,7 +24,8 @@ class RWTHufflepuffy(discord.Client):
         # save all necessary things in the bot
         self.votes = []
         self.mongo = pymongo.MongoClient(mongoUri, port=47410)
-
+        self.inspirobot = extra.inspirobot()
+        self.quotable = extra.quotable()
         # change bot's status
         await self.change_presence(activity=discord.Game(name='with fire'))
 

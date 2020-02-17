@@ -69,6 +69,8 @@ async def vote_handler(bot: any, message: any):
         # wrong action
         else:
             await message.channel.send(f"**:x: VOTE - WRONG ACTION**\n{message.author.mention} -- `{command[1]}` is not a valid action for the command `{command[0]}` ")
+    
+    # okay.... are you even trying??? 
     except Exception as e:
         await message.channel.send(f"**:x: VOTE**\nHey {devRole.mention} There was an error.\n```\n{e}\n```")
 
