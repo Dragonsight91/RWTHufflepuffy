@@ -6,4 +6,4 @@ from . import role
 from . import quote
 from . import nick
 
-__all__ = [ "feat_req", "voting", "help", "role", "welcome", "quote" ]
+__all__ = [ "feat_req", "voting", "help", "role", "welcome", "quote", "nick" ]
