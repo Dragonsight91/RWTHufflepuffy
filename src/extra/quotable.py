@@ -8,8 +8,8 @@ class quotable(object):
         self.name = "quotable"
         self.url = "https://api.quotable.io"
     
-    def get_quote(self):
-        data = self.__get_data()
+    async def get_quote(self):
+        data = await self.__get_data()
 
         try:
             quote = data["content"]
@@ -18,9 +18,9 @@ class quotable(object):
         else:
             return quote
 
-    def __get_data(self):
+    async def __get_data(self):
         try:
-            url = f'{self.url}/random?maxlength=50'
+            url = f'{self.url}/random'
             response = req.get(url)
             response.raise_for_status()
         except Exception:
