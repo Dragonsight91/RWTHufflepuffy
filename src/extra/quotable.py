@@ -16,7 +16,7 @@ class quotable(object):
         except Exception:
             return False
         else:
-            return quote
+            return data
 
     async def __get_data(self):
         try:
