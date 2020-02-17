@@ -2,8 +2,12 @@ import discord
 
 async def quote_handler(bot, message):
     command = list(filter(lambda x : x != "" ,str(message.content).split(" ")))
-    devRole = discord.utils.get(message.author.guild.roles, name="Developer")
+    devRole = discord.utils.get(message.guild.roles, name="Developer")
 
+    # nice try, but no
+    if len(command) <2:
+        message.channel.send(f"**:x: QUOTE - NO API SPECIFIED**\nPlease specify an API to use, when using this command. To get a list of currently supported APIs, write `$help quote`.")
+    
     # :well at leas
     try:
         # USELESS INSPIRATION

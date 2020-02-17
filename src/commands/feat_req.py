@@ -3,7 +3,7 @@ import discord
 # handle the $feature command
 async def handle_feat(mongo, message):
     # get command and dev role
-    words = str(message.content).split(" ")
+    words = list(filter(lambda x : x != "" ,str(message.content).split(" ")))
     command = words[0:2] + [" ".join(words[2:])]
     devRole = discord.utils.get(message.guild.roles, name="Developer")
 
