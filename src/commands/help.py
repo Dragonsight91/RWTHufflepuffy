@@ -21,6 +21,8 @@ async def help_handler(bot, message):
                 response = await role()
             elif command[1] == "quote":
                 response = await quote()
+            elif command[1] == "nick":
+                response = await nick()
             # that doesn't seem to exist...
             else:
                 response = "**:x: HELP - NONEXISTENT COMMAND **\n THAT is not a command currently supported.\n You can add a request with `$feature add {text}` or list the available commands with `$help`"
@@ -40,7 +42,8 @@ async def help_main():
         "- feature  ::   submits a feature request to the database",
         "- welcome  ::   gives the sender their study role and nickname",
         "- role     ::   adds or removes a role from you",
-        "- quote    ::   fetches a random text or image quote from the specified service"
+        "- quote    ::   fetches a random text or image quote from the specified service",
+        "- nick     ::   can edit a user's nickname."
     ]
 
     comm = ""
