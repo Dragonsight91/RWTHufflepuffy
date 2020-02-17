@@ -61,7 +61,7 @@ async def voting():
     comm = ""
     for i in alist:
         comm += i + "\n"
-    response = f"**:grey_question: HELP    --    vote **\nThis is a list of actions and their parameters. To use them, write `$vote {{action}} {{arguments}}`.\n```asciidoc\n{comm}\n```"
+    response = f"**:grey_question: HELP    --    vote **\nThis is a list of actions and their parameters. To use them, write `$vote {{action}} {{arguments}}`.\n```asciidoc\n===== ACTIONS =====\n{comm}\n```"
     return response
 
 
@@ -74,7 +74,7 @@ async def feature():
     comm = ""
     for i in alist:
         comm += i + "\n"
-    response = f"**:grey_question: HELP    --    feature **\nThis is a list of actions and their parameters. To use them, write `$feature {{action}} {{arguments}}`.\n```asciidoc\n{comm}\n```"
+    response = f"**:grey_question: HELP    --    feature **\nThis is a list of actions and their parameters. To use them, write `$feature {{action}} {{arguments}}`.\n```asciidoc\n===== ACTIONS =====\n{comm}\n```"
     return response
 
 
@@ -93,9 +93,11 @@ async def role():
     comm = ""
     for i in alist:
         comm += i + "\n"
-    response = f"**:grey_question: HELP    --    welcome **\nThis command adds or removes roles. Here is a list of actions and their parameters that this command can use. To use them, write `$role {{action}} {{arguments}}`.\n```asciidoc\n{comm}\n```"
+    response = f"**:grey_question: HELP    --    welcome **\nThis command adds or removes roles. Here is a list of actions and their parameters that this command can use. To use them, write `$role {{action}} {{arguments}}`.\n```asciidoc\n===== ACTIONS =====\n{comm}\n```"
     return response
 
+
+# help for quote command
 async def quote():
     alist = [
         "- quotable    :: fetch a random TEXT quote.",
@@ -104,5 +106,17 @@ async def quote():
     comm = ""
     for i in alist:
         comm += i + "\n"
-    response = f"**:grey_question: HELP    --    quote **\nThis command gets a random quote from a specified service. You use the command like this: `$quote {{service}}` and there are no special parameters.\nHere's the list of supported services:\n```asciidoc\n{comm}\n```"
+    response = f"**:grey_question: HELP    --    quote **\nThis command gets a random quote from a specified service. You use the command like this: `$quote {{service}}` and there are no special parameters.\nHere's the list of supported services:\n```asciidoc\n===== SERVICES =====\n{comm}\n```"
+    return response
+
+
+# help for nick command
+async def nick():
+    alist = [
+        "- set {nick}    :: Sets the user's Nick to the specified nickname"
+    ]
+    comm = ""
+    for i in alist:
+        comm += i + "\n"
+    response = f"**:grey_question: HELP    --    nick **\nThis command can edit a user's Nick. This does not work on the Owner or those with the `Admin` or `Developer` role. This is the list of currently supported actions:```asciidoc\n===== ACTIONS =====\n{comm}\n```"
     return response
