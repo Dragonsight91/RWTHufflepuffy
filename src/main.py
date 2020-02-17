@@ -101,6 +101,9 @@ class RWTHufflepuffy(discord.Client):
         elif message.content.startswith("$help"):
             await commands.help.help_handler(bot, message)
 
+        # handle the $quote command
+        elif message.content.startswith("$quote"):
+            await commands.quote.quote_handler(bot, message)
 
 
 # START DAT SHIT

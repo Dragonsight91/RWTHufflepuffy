@@ -39,7 +39,7 @@ class inspirobot(object):
         img = self.__get_flow()
 
         # FUCK, NO. WHY DOESN'T THIS WORK???? ~ Luzi
-        if not data:
+        if not img:
             return False
 
         # return the image
