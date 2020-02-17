@@ -29,7 +29,7 @@ async def quote_handler(bot, message):
 
             await message.channel.send(f"**:pencil: QUOTE - INSPIROBOT**", embed=e)
         elif command[1] == "quotable":
-            await message.channel.send(f"**:pencil: QUOTE - {command[1].upper()}**\n```asciidoc\n===== QUOTE BY {response["author"].upper()} =====\n{response["content"]}\n```")
+            await message.channel.send(f"**:pencil: QUOTE - {command[1].upper()}**\n```asciidoc\n===== QUOTE BY {response['author'].upper()} =====\n{response['content']}\n```")
         else:
             await message.channel.send(f"**:pencil: QUOTE - {command[1].upper()}**\n```asciidoc\n===== QUOTE =====\n{response}\n```")
     except Exception as e:
