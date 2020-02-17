@@ -5,7 +5,7 @@ import re
 
 
 async def vote_handler(bot: any, message: any):
-    command = list(filter(lambda x : x != "" ,str(message.content).split(" ")))
+    msg = list(filter(lambda x : x != "" ,str(message.content).split(" ")))
     command = msg[0:2] + [" ".join(msg[2:])]
 
     devRole = discord.utils.get(message.guild.roles, name="Developer")
