@@ -39,7 +39,7 @@ async def help_main():
         "- vote     ::   creates, removes or lists active votes",
         "- feature  ::   submits a feature request to the database",
         "- welcome  ::   gives the sender their study role and nickname",
-        "- role     ::   adds or removes a role from you"
+        "- role     ::   adds or removes a role from you",
         "- quote    ::   fetches a random text or image quote from the specified service"
     ]
 
