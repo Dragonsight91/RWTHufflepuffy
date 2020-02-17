@@ -12,7 +12,7 @@ async def nick_handler(bot, message):
 
         # i humbly bow to you, my lord/lady
         if devRole in message.author.roles or adminRole in message.author.roles or message.author == message.channel.guild.owner:
-            await message.channel.send(f"**:no_entry: NICK - ADMIN/DEV ROLE DETECTED**\nSorry, bt due to discord's role hierarchy, i cannot change the nick of someone with the roles {devRole.mention}, {adminRole.mention} or the person that is the Server Owner.\nSorry, guys, but y'all have the high ground.")
+            await message.channel.send(f"**:no_entry: NICK - ADMIN/DEV ROLE DETECTED**\nSorry, but due to discord's role hierarchy, i cannot change the nick of someone with the roles {devRole.mention}, {adminRole.mention} or the person that is the Server Owner.\nSorry, guys, but y'all have the high ground.")
             return        
         
         # seems alright
