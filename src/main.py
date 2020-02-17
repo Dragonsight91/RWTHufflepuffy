@@ -106,6 +106,9 @@ class RWTHufflepuffy(discord.Client):
         elif message.content.startswith("$quote"):
             await commands.quote.quote_handler(bot, message)
 
+        # handle teh $nick command
+        elif message.content.startswith("$nick"):
+            await commands.nick.nick_handler(bot, message)
 
 # START DAT SHIT
 bot = RWTHufflepuffy()
