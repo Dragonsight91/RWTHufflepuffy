@@ -35,8 +35,8 @@ class inspirobot(object):
     async def get_quote(self):
 
         # get a flow and init quotes array
-        img = self.__get_flow()
-
+        img = await self.__get_flow()
+        
         # FUCK, NO. WHY DOESN'T THIS WORK???? ~ Luzi
         if not img:
             return False

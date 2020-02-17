@@ -24,10 +24,10 @@ async def quote_handler(bot, message):
         
 
         if command[1] == "inspirobot":
-            e = discord.Embed()
-            e.set_image(url="response")
+            e = discord.Embed(colour=0xff00e7)
+            e.set_image(url=response)
 
-            await message.channel.send(f"**:pencil: QUOTE - INSPIROBOT**\n{e}")
+            await message.channel.send(f"**:pencil: QUOTE - INSPIROBOT**", embed=e)
         else:
             await message.channel.send(f"**:pencil: QUOTE - {command[1].upper()}**\n```asciidoc\n===== QUOTE =====\n{response}\n```")
     except Exception as e:
