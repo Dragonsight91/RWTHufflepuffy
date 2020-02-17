@@ -9,7 +9,7 @@ async def welcome_handler(bot, message):
         member = message.author
         server = message.author.guild
         admin = discord.utils.get(server.roles, name="Admin")
-        
+
         # was the role mentioned and name given?
         if len(message.role_mentions) == 0 or len(command) < 3:
             response = "**:x: WELCOME - MISSING PARAMETERS**\nOops, something went wrong. Please @mention the Role AND your Name.\nThe command can be used like this: `$welcome {role} {name}`"
@@ -21,18 +21,26 @@ async def welcome_handler(bot, message):
         # why u try again? 
         elif len(member.roles) >1 and not (admin in member.roles or devRole in member.roles):
             response = "**:x: WELCOME - ALREADY REGISTERED**\nSorry, but you have already been registered. If you wanna change your role, you can use the `$role` command."
-        
+        elif admin in message.role_mentions or devRole in message.role_mentions:
+            response = f"**:x: WELCOME - NOT PERMITTED**\nYou cannot give yourself the {admin.mention} or the {devRole.mention} Roles."
         # apparently all is good
         else:
             # get role and new Nick
             role = message.role_mentions[0]
             nick = command[2]
-
+            isAdmin = False
             # add role and nick
             await member.add_roles(role)
-            await member.edit(nick=nick)
-
-            response = f"**:hibiscus: WELCOME :hibiscus:**\nWelcome to RWTHufflepuff, {member.mention}. You have now been registered as {role.mention} Student.\nHave fun."
+            if admin in member.roles or devRole in member.roles:
+                isAdmin = True
+            else:
+                await member.edit(nick=nick)
+            
+            
+            if isAdmin:
+                response = f"**:no_entry: WELCOME - ADMIN/DEV DETECTED**\nYou Seem to have either The {admin.mention} or the {devRole.mention}.\nAs Bot, i cannot change your nick, because those roles are above my role."
+            else:
+                response = f"**:hibiscus: WELCOME :hibiscus:**\nWelcome to RWTHufflepuff, {member.mention}. You have now been registered as {role.mention} Student.\nHave fun."
         await message.channel.send(response)
 
     # an error... AGAIN... 
