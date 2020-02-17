@@ -7,10 +7,9 @@ import json
 class inspirobot(object):
 
     # stuff that happens on first call
-    async def __init__(self):
+    def __init__(self):
         self.name = "inspirobot"
         self.url = "https://inspirobot.me"
-        self.sessid = self.__get_sessid()
 
     # get the list of stuff from inspirobot
     async def __get_flow(self):
@@ -33,7 +32,7 @@ class inspirobot(object):
             return response.text
 
     # public function that gets data from inspiro and then gets the shortest quote
-    async def get_quote(self, isText):
+    async def get_quote(self):
 
         # get a flow and init quotes array
         img = self.__get_flow()

@@ -4,7 +4,7 @@ import json
 
 class quotable(object):
 
-    def __init__(self, config):
+    def __init__(self):
         self.name = "quotable"
         self.url = "https://api.quotable.io"
     
