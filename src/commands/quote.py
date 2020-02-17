@@ -24,7 +24,7 @@ async def quote_handler(bot, message):
         
 
         if command[1] == "inspirobot":
-            await message.channel.send("**:pencil: QUOTE - INSPIROBOT**\n", {"files": response})
+            await message.channel.send("**:pencil: QUOTE - INSPIROBOT**\n", file=response)
         else:
             await message.channel.send(f"**:pencil: QUOTE - {command[1].upper()}**\n```asciidoc\n===== QUOTE =====\n{response}\n```")
     except Exception as e:
