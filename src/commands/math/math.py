@@ -39,7 +39,7 @@ async def math_handler(bot:any, message:any):
             num = float(command[2])
             out = ieee745.convert(num)
 
-            response = f"**:bar_chart: MATH TOFLOAT**\n```asciidoc\n==== IEEE745 FLOAT TO BIN ====\nYour Input: {num}\nGenerated output:\n- Float32: {out['float32']}\n- Float64: {out['float64']"
+            response = f"**:bar_chart: MATH TOFLOAT**\n```asciidoc\n==== IEEE745 FLOAT TO BIN ====\nYour Input: {num}\nGenerated output:\n- Float32: {out['float32']}\n- Float64: {out['float64']}"
         elif command[1] == "permutations":
             pass
 
