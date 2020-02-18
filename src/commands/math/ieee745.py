@@ -24,7 +24,9 @@ async def getFloat(sign, integer, fraction, double=False):
 
     # calc exponent
     offset, bias = len(integer)-1, 2**(expLen-1)-1
-    exp = await conv_bin.conv_Bin(bias+offset if not(integer=="0" and integer=="10" and integer == "1") else bias-offset).rjust(expLen, "0")
+    exp = await conv_bin.conv_Bin(bias+offset if not(integer=="0" and integer=="10" and integer == "1") else bias-offset)
+    exp = exp.rjust(expLen, "0")
+    
     print(bias)
 
     # calc mantisse & pad 
