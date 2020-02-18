@@ -23,5 +23,8 @@ async def get_permutations(word):
 	# correct permutations for doubles
 	for group in groups.keys():
 		perms = perms/ await factorize(groups[group])
-	return int(perms)
+	return {
+		"perms": int(perms),
+		"groups": groups
+	}
 

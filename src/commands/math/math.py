@@ -39,9 +39,14 @@ async def math_handler(bot:any, message:any):
             num = float(command[2])
             out = await ieee745.convert(num)
 
-            response = f"**:bar_chart: MATH TOFLOAT**\n```asciidoc\n==== IEEE745 FLOAT TO BIN ====\nYour Input: {num}\nGenerated output:\n- Float32: {out['float32']}\n- Float64: {out['float64']}\n```"
+            response = f"**:bar_chart: MATH - TOFLOAT**\n```asciidoc\n==== IEEE745 FLOAT TO BIN ====\nYour Input: {num}\nGenerated output:\n- Float32: {out['float32']}\n- Float64: {out['float64']}\n```"
+        
         elif command[1] == "permutations":
-            pass
+            out = await permutations.get_permutations(command[2])
+            groups = ""
+            for i in out["groups"].keys():
+                groups += f"    - Group Name: {i}      Count: {out['groups'][i]}\n"
+            response = f"**:bar_chart: MATH - PERMUTATIONS**\n```asciidoc\n==== PERMUTATION CALCULATION ====\nYour Input: {command[2]}\nPermutations: {out['perms']}\nGroups:\n{groups}"
 
         await message.channel.send(response)
     except Exception as e:
