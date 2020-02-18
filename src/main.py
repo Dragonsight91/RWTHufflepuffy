@@ -110,6 +110,9 @@ class RWTHufflepuffy(discord.Client):
         elif message.content.startswith("$nick"):
             await commands.nick.nick_handler(bot, message)
 
+        # handle the $math command
+        elif message.content.startswith("$math"):
+            await commands.math.math.math_handler(bot, message)
 # START DAT SHIT
 bot = RWTHufflepuffy()
 bot.run(os.environ['DISCORD_KEY'])
