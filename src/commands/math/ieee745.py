@@ -33,11 +33,11 @@ async def getFloat(sign, integer, fraction, double=False):
     return (sign, exp, mantisse) 
     
 async def convert(num:float):
-    sign, pos = getSign(num)
-    fraction = getBinRemainder(pos%1, 30)
-    integer = conv_bin.conv_Bin(int(pos - (pos%1)))
-    float32 = getFloat(sign, integer, fraction)
-    float64 = getFloat(sign, integer, fraction, double=True)
+    sign, pos = await getSign(num)
+    fraction = await getBinRemainder(pos%1, 30)
+    integer = await conv_bin.conv_Bin(int(pos - (pos%1)))
+    float32 = await getFloat(sign, integer, fraction)
+    float64 = await getFloat(sign, integer, fraction, double=True)
 
     result = {
         "float32": float32,
