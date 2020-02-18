@@ -24,7 +24,7 @@ async def getFloat(sign, integer, fraction, double=False):
 
     # calc exponent
     offset, bias = len(integer)-1, 2**(expLen-1)-1
-    exp = await conv_bin.conv_Bin(bias+offset if not(integer=="0" and integer=="10" and integer == "1") else bias-offset)
+    exp = await conv_bin.conv_Bin(bias+offset if not(integer=="0" and integer=="10" and integer == "1") else bias-offset, False)
     exp = exp.rjust(expLen, "0")
     
     print(bias)
@@ -37,7 +37,7 @@ async def getFloat(sign, integer, fraction, double=False):
 async def convert(num:float):
     sign, pos = await getSign(num)
     fraction = await getBinRemainder(pos%1, 30)
-    integer = await conv_bin.conv_Bin(int(pos - (pos%1)))
+    integer = await conv_bin.conv_Bin(int(pos - (pos%1)), False)
     float32 = await getFloat(sign, integer, fraction)
     float64 = await getFloat(sign, integer, fraction, double=True)
 

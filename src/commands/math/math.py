@@ -22,7 +22,7 @@ async def math_handler(bot:any, message:any):
             elif num % 1 != 0:
                 response = "**:x: MATH - INVALID NUMBER**\nThis module does not support floating point numbers. Please use the `ieee745` Module for that."
 
-            out = await conv_bin.conv_Bin(num)
+            out = await conv_bin.conv_Bin(num, True)
             print(out)
             response = f"**:bar_chart: MATH - BIN**\n```asciidoc\n==== DEC TO BIN CONVERSION ====\nYour Input: {num}\nThe Output: {out}\n```"
         
@@ -39,7 +39,7 @@ async def math_handler(bot:any, message:any):
             num = float(command[2])
             out = await ieee745.convert(num)
 
-            response = f"**:bar_chart: MATH - TOFLOAT**\n```asciidoc\n==== IEEE745 FLOAT TO BIN ====\nYour Input: {num}\nGenerated output:\n- Float32: {out['float32']}\n- Float64: {out['float64']}\n```"
+            response = f"**:bar_chart: MATH - TOFLOAT**\n```asciidoc\n==== IEEE745 FLOAT TO BIN ====\nYour Input: {num}\nGenerated output:\n- Float32: {out['float32'][0]} {out['float32'][1]} {out['float32'][2]}\n- Float64: {out['float64'][0]} {out['float64'][1]} {out['float64'][2]}\n```"
         
         elif command[1] == "permutations":
             out = await permutations.get_permutations(command[2])
