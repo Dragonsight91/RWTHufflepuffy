@@ -10,7 +10,7 @@ async def conv_Bin(n:int):
             res += str(n%2)
         return res
 
-    result = await convert(n)[::-1]
+    result = (await convert(n))[::-1]
     pad = (len(result)//8 + 1)*8 if len(result)%8 != 0 else (len(result)//8 + 1)
     
     binary = result.rjust(pad, "0")
