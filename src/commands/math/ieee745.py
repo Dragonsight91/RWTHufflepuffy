@@ -31,7 +31,7 @@ async def getFloat(sign, integer, fraction, double=False):
     mantisse = (integer[1:len(integer)] + fraction).ljust(lenMant,"0")[0:lenMant]
 
     return (sign, exp, mantisse) 
-
+    
 async def run(num:float):
     sign, pos = getSign(num)
     fraction = getBinRemainder(pos%1, 30)

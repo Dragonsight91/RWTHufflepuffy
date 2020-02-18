@@ -50,7 +50,7 @@ class RWTHufflepuffy(discord.Client):
         elif len(result)>0:
             await commands.voting.vote_edit(bot, reaction, result[0][0], True)
 
-    
+        
     # reaction removed from message
     async def on_reaction_remove(self, reaction, user):
         

@@ -15,17 +15,19 @@ async def math_handler(bot:any, message:any):
         
         if command[1] == "bin":
             num = int(command[2])
-
+            print(num)
             if num <0:
                 response ="**:x: MATH - INVALID NUMBER**\nThis Module does not currently support negative numbers, please input positive integers."
             elif num % 1 != 0:
                 response = "**:x: MATH - INVALID NUMBER**\nThis module does not support floating point numbers. Please use the `ieee745` Module for that."
 
-            bin = await conv_bin.conv_Bin(num)
-            response = f"**:bar_chart: MATH - BIN**\n```asciidoc\n==== BINARY CONVERSION ====\nYour Input: num\nThe Output:{bin}\n```"
+            out = await conv_bin.conv_Bin(num)
+            print(out)
+            response = f"**:bar_chart: MATH - BIN**\n```asciidoc\n==== BINARY CONVERSION ====\nYour Input: {num}\nThe Output: {out}\n```"
         
         elif command[1] == "dec":
-            pass
+            out = await conv_bin.conv_Dec(command[2])
+            response = f"**:bar_chart: MATH - BIN**\n```asciidoc\n==== BINARY CONVERSION ====\nYour Input: {command[2]}\nThe Output: {out}\n```"
 
         elif command[1] == "ieee745":
             pass
@@ -33,6 +35,7 @@ async def math_handler(bot:any, message:any):
         elif command[1] == "permutations":
             pass
 
+        await message.channel.send(response)
     except Exception as e:
         await message.channel.send(f"**:x: MATH - ERROR **\nHey {devRole.mention} There was an error.\n```\n{e}\n```")
 
