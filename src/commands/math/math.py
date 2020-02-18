@@ -24,7 +24,7 @@ async def math_handler(bot:any, message:any):
 
             out = await conv_bin.conv_Bin(num)
             print(out)
-            response = f"**:bar_chart: MATH - BIN**\n```asciidoc\n==== BINARY CONVERSION ====\nYour Input: {num}\nThe Output: {out}\n```"
+            response = f"**:bar_chart: MATH - BIN**\n```asciidoc\n==== DEC TO BIN CONVERSION ====\nYour Input: {num}\nThe Output: {out}\n```"
         
         elif command[1] == "dec":
             num = re.compile("[2-9]|\D")
@@ -33,11 +33,13 @@ async def math_handler(bot:any, message:any):
                 return
 
             out = await conv_bin.conv_Dec(command[2])
-            response = f"**:bar_chart: MATH - BIN**\n```asciidoc\n==== BINARY CONVERSION ====\nYour Input: {command[2]}\nThe Output: {out}\n```"
+            response = f"**:bar_chart: MATH - DEC**\n```asciidoc\n==== BIN TO DEC CONVERSION ====\nYour Input: {command[2]}\nThe Output: {out}\n```"
 
-        elif command[1] == "ieee745":
-            pass
+        elif command[1] == "tofloat":
+            num = float(command[2])
+            out = ieee745.convert(num)
 
+            response = f"**:bar_chart: MATH TOFLOAT**\n```asciidoc\n==== IEEE745 FLOAT TO BIN ====\nYour Input: {num}\nGenerated output:\n- Float32: {out['float32']}\n- Float64: {out['float64']"
         elif command[1] == "permutations":
             pass
 

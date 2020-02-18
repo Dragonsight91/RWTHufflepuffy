@@ -32,7 +32,7 @@ async def getFloat(sign, integer, fraction, double=False):
 
     return (sign, exp, mantisse) 
     
-async def run(num:float):
+async def convert(num:float):
     sign, pos = getSign(num)
     fraction = getBinRemainder(pos%1, 30)
     integer = conv_bin.conv_Bin(int(pos - (pos%1)))
