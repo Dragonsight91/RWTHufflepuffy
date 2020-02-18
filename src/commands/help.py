@@ -23,6 +23,8 @@ async def help_handler(bot, message):
                 response = await quote()
             elif command[1] == "nick":
                 response = await nick()
+            elif command[1] == "math":
+                response = await math()
             # that doesn't seem to exist...
             else:
                 response = "**:x: HELP - NONEXISTENT COMMAND **\n THAT is not a command currently supported.\n You can add a request with `$feature add {text}` or list the available commands with `$help`"
@@ -43,7 +45,8 @@ async def help_main():
         "- welcome  ::   gives the sender their study role and nickname",
         "- role     ::   adds or removes a role from you",
         "- quote    ::   fetches a random text or image quote from the specified service",
-        "- nick     ::   can edit a user's nickname."
+        "- nick     ::   can edit a user's nickname.",
+        "- math     ::   does some math stuff."
     ]
 
     comm = ""
@@ -122,4 +125,18 @@ async def nick():
     for i in alist:
         comm += i + "\n"
     response = f"**:grey_question: HELP    --    nick **\nThis command can edit a user's Nick. You can use the command like this: `$nick {{action}} {{argument}}`\nThis does not work on the Owner or those with the `Admin` or `Developer` role. This is the list of currently supported actions:```asciidoc\n===== ACTIONS =====\n{comm}\n```"
+    return response
+
+async def math():
+    alist = [
+        "- bin {num}             :: convert a positive decimal integer to binary",
+        "- dec {num}             :: convert a positive binary integer to decimal",
+        "- tofloat {float}       :: convert any floating point number to binary with IEEE745 standard",
+        "- permutations {string} :: calculate the amount of unique permutations of {string}.",
+        #"- logic {expression}    :: creates a logic table from the given expression. + is OR and * is AND, everything else: ¬, ⇔, ⇒, ⊕"
+    ]
+    comm = ""
+    for i in alist:
+        comm += i + "\n"
+    response = f"**:grey_question: HELP    --    math **\nThis command can do some interesting mathematical stuff. You can use the command like this: `$math {{command}} {{arguments}}`.\nHere is the list of things that are currently possible:\n```asciidoc\n===== ACTIONS =====\n{comm}\n```"
     return response
