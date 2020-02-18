@@ -27,7 +27,7 @@ async def math_handler(bot:any, message:any):
             response = f"**:bar_chart: MATH - BIN**\n```asciidoc\n==== BINARY CONVERSION ====\nYour Input: {num}\nThe Output: {out}\n```"
         
         elif command[1] == "dec":
-            num = re.compile("([2-9]|\D)*")
+            num = re.compile("[2-9]|\D")
             if bool(num.match(command[2])):
                 await message.channel.send("**:x: MATH - DECIMAL NUMBER OR CHARACTER FOUND**\nPlease do not input any decimal numbeers or characterw, this is for converting binary numbers only.")
                 return
