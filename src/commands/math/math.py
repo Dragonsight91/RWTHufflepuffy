@@ -14,7 +14,7 @@ async def math_handler(bot:any, message:any):
     try:
         
         if command[1] == "bin":
-            num = int(command[3])
+            num = int(command[2])
 
             if num <0:
                 response ="**:x: MATH - INVALID NUMBER**\nThis Module does not currently support negative numbers, please input positive integers."
