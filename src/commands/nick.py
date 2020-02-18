@@ -22,8 +22,12 @@ async def nick_handler(bot, message):
             if len(command) < 3:
                 await message.channel.send(f"**:x: NICK - NO NICK**\nPlease specify a nickname you want to use. The usage of this command is: `$nick set {{nick}}`")
                 return
+
+            # IT'S TOO LONG DADDY
             elif len(command[2]) >32:
                 await message.channel.send(f"*:x: NICK - TOO LONG**\nPlease use no more than 32 characters for your desired nickname. Sorry, this one's on Discord.")
+            
+            # who is this weird dude called Nick
             nick = command[2]
             await message.author.edit(nick=nick)
             await message.channel.send(f"**:white_check_mark: NICK - SUCCESS**\nHey {message.author.mention} your nick has now been set to `{nick}`")

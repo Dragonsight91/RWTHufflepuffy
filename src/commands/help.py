@@ -121,5 +121,5 @@ async def nick():
     comm = ""
     for i in alist:
         comm += i + "\n"
-    response = f"**:grey_question: HELP    --    nick **\nThis command can edit a user's Nick. This does not work on the Owner or those with the `Admin` or `Developer` role. This is the list of currently supported actions:```asciidoc\n===== ACTIONS =====\n{comm}\n```"
+    response = f"**:grey_question: HELP    --    nick **\nThis command can edit a user's Nick. You can use the command like this: `$nick {{action}} {{argument}}`\nThis does not work on the Owner or those with the `Admin` or `Developer` role. This is the list of currently supported actions:```asciidoc\n===== ACTIONS =====\n{comm}\n```"
     return response
