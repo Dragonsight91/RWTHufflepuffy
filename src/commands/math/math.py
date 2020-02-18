@@ -21,7 +21,7 @@ async def math_handler(bot:any, message:any):
             elif num % 1 != 0:
                 response = "**:x: MATH - INVALID NUMBER**\nThis module does not support floating point numbers. Please use the `ieee745` Module for that."
 
-            bin = conv_bin.conv_Bin(num)
+            bin = await conv_bin.conv_Bin(num)
             response = f"**:bar_chart: MATH - BIN**\n```asciidoc\n==== BINARY CONVERSION ====\nYour Input: num\nThe Output:{bin}\n```"
         
         elif command[1] == "dec":
