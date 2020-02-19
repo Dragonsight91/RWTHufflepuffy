@@ -1,3 +1,4 @@
+
 class Equation(object):
     def __init__(self, equation):
         self.equation = self.filterWhitespace(equation)
@@ -82,7 +83,7 @@ class Equation(object):
     def partition(self, equation, start, end):
         return equation[start:end]
 
-    def solve(self):
+    async def solve(self):
         solution = ""
         ldic = locals()
         exec("solution = " + self.equationFunc, globals(), ldic)
@@ -114,50 +115,29 @@ class Equation(object):
     def negate(self, A):
         return not A
 
-    def exportCSV(self):
-        csv = open("TruthTable.csv", "a+", encoding="utf-8")
 
-        # generate the header
-        header = "\n"
+    async def asciiTableSolve(self):
+        header = ""
         for key in self.Vars.keys():
-            header += f"{key},"
-        header += f'{self.equation}'
-        # print(header)
-        csv.write(header)
+            header += f"  {key}  |"
+        header += f'  Equation  '
+        header += "\n"+"-"*43
+        
+        out = {
+            "header":header,
+            "table": ""
+        }
 
-        # generate the table rows
         keys = self.Vars.keys()
         for i in range(0, (2**len(keys))):
             bin = format(i, 'b')
             counter = str(int(bin)).zfill(len(keys))
 
-            row = "\n"
+            row = ""
             for index, key in enumerate(keys):
                 self.Vars[key] = bool(int(counter[index]))
-                row += f'{int(self.Vars[key])}\t,'
-                self.Vars[key] = False
-            row = f'{row}{int(eval(self.solve()))}'
-            # print(row)
-            csv.write(row)
-        csv.close()
+                row += f'  {int(self.Vars[key])}  |'
+            
+            out["table"] += f"{row}  {int(eval(self.solve()))} \n"
 
-    def asciiTableSolve(self):
-        header = "\t"
-        for key in self.Vars.keys():
-            header += f"  {key}\t|"
-        header += f'  {self.equation}  '
-        header += "\n\t"+"-"*60
-        print(header)
-
-        keys = self.Vars.keys()
-        for i in range(0, (2**len(keys))):
-            bin = format(i, 'b')
-            counter = str(int(bin)).zfill(len(keys))
-            # print(f'{counter}')
-
-            row = "\t"
-            for index, key in enumerate(keys):
-                self.Vars[key] = bool(int(counter[index]))
-                row += f'  {int(self.Vars[key])}\t|'
-            # print(self.Vars)
-            print(f'{row}  {int(eval(self.solve()))}')
+        return out

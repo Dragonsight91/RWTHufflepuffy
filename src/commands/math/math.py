@@ -6,6 +6,7 @@ import re
 from . import ieee745
 from . import permutations
 from . import convert_binary as conv_bin
+from . import logicsolver as logic
 
 
 async def math_handler(bot:any, message:any):
@@ -49,7 +50,10 @@ async def math_handler(bot:any, message:any):
             response = f"**:bar_chart: MATH - PERMUTATIONS**\n```asciidoc\n==== PERMUTATION CALCULATION ====\nYour Input: {command[2]}\nPermutations: {out['perms']}\nGroups:\n{groups}"
 
         elif command[1] == "logic":
-            pass
+            
+            expr = logic.Equation(command[2])
+            table = expr.asciiTableSolve()
+            response = f"**:bar_chart: MATH - LOGIC SOLVER**\n```asciidoc\n==== LOGIC SOLVER ====\n- Expression: {expr.equation}\n{table}\n```"
             
         await message.channel.send(response)
     except Exception as e:
