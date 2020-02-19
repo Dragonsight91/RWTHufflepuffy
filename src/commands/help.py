@@ -166,3 +166,5 @@ async def logic():
         sym += i + "\n"
     syntax = f"```asciidoc\n==== SYMBOLS ====\n{sym}\n```"
     response = f"**:grey_question: HELP    --    logic **\nThis command can evaluate logical expressions. You can use the command like this: `$logic {{command}} {{arguments}}`.\nHere is the list of things that are currently possible:\n```asciidoc\n===== ACTIONS =====\n{comm}\n```\n\n**SYMBOLS**\n{sym}"
+
+    return response
