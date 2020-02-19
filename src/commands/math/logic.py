@@ -29,8 +29,8 @@ async def convert(eq: str):
         { "from" : "\\and", "to": "∧"},
         { "from" : "\\or", "to": "∨"},
         { "from" : "\\xor", "to": "⊕"},
-        { "from" : "\\imp", "to": "→"},
-        { "from" : "\\equ", "to": "↔"},
+        { "from" : "\\imp", "to": "⇒"},
+        { "from" : "\\equ", "to": "⇔"},
         { "from" : "\\neg", "to": "¬"}
     ]
     out = eq
