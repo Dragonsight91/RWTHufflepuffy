@@ -49,11 +49,6 @@ async def math_handler(bot:any, message:any):
                 groups += f"    - Group Name: {i}      Count: {out['groups'][i]}\n"
             response = f"**:bar_chart: MATH - PERMUTATIONS**\n```asciidoc\n==== PERMUTATION CALCULATION ====\nYour Input: {command[2]}\nPermutations: {out['perms']}\nGroups:\n{groups}"
 
-        elif command[1] == "logic":
-
-            expr = logic.Equation(command[2])
-            table = await expr.asciiTableSolve()
-            response = f"**:bar_chart: MATH - LOGIC SOLVER**\n```asciidoc\n==== LOGIC SOLVER ====\n- Expression: {expr.equation}\n{table['header']}\n\n{table['table']}\n```"
             
         await message.channel.send(response)
     

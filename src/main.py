@@ -100,19 +100,22 @@ class RWTHufflepuffy(discord.Client):
 
         # handle the $help command
         elif message.content.startswith("$help"):
-            await commands.help.help_handler(bot, message)
+            await commands.help.help_handler(self, message)
 
         # handle the $quote command
         elif message.content.startswith("$quote"):
-            await commands.quote.quote_handler(bot, message)
+            await commands.quote.quote_handler(self, message)
 
         # handle teh $nick command
         elif message.content.startswith("$nick"):
-            await commands.nick.nick_handler(bot, message)
+            await commands.nick.nick_handler(self, message)
 
         # handle the $math command
         elif message.content.startswith("$math"):
-            await commands.math.math.math_handler(bot, message)
+            await commands.math.math.math_handler(self, message)
+        
+        elif message.content.startswith("$logic"):
+            await commands.math.logic.logic_handler(self, message)
 # START DAT SHIT
 bot = RWTHufflepuffy()
 bot.run(os.environ['DISCORD_KEY'])
