@@ -56,6 +56,7 @@ async def math_handler(bot:any, message:any):
             response = f"**:bar_chart: MATH - LOGIC SOLVER**\n```asciidoc\n==== LOGIC SOLVER ====\n- Expression: {expr.equation}\n{table['header']}\n\n{table['table']}\n```"
             
         await message.channel.send(response)
+    
     except Exception as e:
         await message.channel.send(f"**:x: MATH - ERROR **\nHey {devRole.mention} There was an error.\n```\n{e}\n```")
 
