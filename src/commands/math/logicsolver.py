@@ -14,7 +14,7 @@ class Equation(object):
     def filterWhitespace(self, equation):
         string = ""
         for char in equation:
-            if(char != " " and char != "\t"):
+            if(char != " " and char != "\t" and char !="\\"):
                 string += char
         print(string)
         return string
