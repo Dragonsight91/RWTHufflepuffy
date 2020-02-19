@@ -150,12 +150,12 @@ async def logic():
     ]
     table = [
         "     Name    |  ASCII   |   UNICODE",
-        "      AND    |  \\and   |     ∧",
-        "      OR     |  \\or    |     ∨",
-        "      NOT    |  \\neg   |     ¬",
-        "      XOR    |  \\xor   |     ⊕",
-        " IMPLICATION |  \\imp   |     →",
-        " EQUIVALENCE |  \\equ   |     ↔"
+        "      AND    |  \\and    |     ∧",
+        "      OR     |  \\or     |     ∨",
+        "      NOT    |  \\neg    |     ¬",
+        "      XOR    |  \\xor    |     ⊕",
+        " IMPLICATION |  \\imp    |     →",
+        " EQUIVALENCE |  \\equ    |     ↔"
     ]
     comm = ""
     for i in alist:
