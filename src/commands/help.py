@@ -149,7 +149,7 @@ async def logic():
         "- ascii {expression}      :: creates a logic table from the given expression, ASCII CHARACTERS ONLY!!"
     ]
     table = [
-        "     Name    |  ASCII   |   UNICODE"
+        "     Name    |  ASCII   |   UNICODE",
         "      AND    |  \\and   |     ∧",
         "      OR     |  \\or    |     ∨",
         "      NOT    |  \\neg   |     ¬",
