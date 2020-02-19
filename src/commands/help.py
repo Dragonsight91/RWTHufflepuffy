@@ -154,7 +154,7 @@ async def logic():
         "      OR     |  \\or    |     ∨",
         "      NOT    |  \\neg   |     ¬",
         "      XOR    |  \\xor   |     ⊕",
-        " IMPLICATION |  \\imp   |     →"
+        " IMPLICATION |  \\imp   |     →",
         " EQUIVALENCE |  \\equ   |     ↔"
     ]
     comm = ""
