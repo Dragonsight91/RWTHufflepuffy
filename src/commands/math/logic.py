@@ -34,4 +34,5 @@ async def convert(eq: str):
     for char in list:
         out = out.replace(char["from"], char["to"])
     
+    print(out)
     return out
