@@ -25,6 +25,8 @@ async def help_handler(bot, message):
                 response = await nick()
             elif command[1] == "math":
                 response = await math()
+            elif command[1] == "logic":
+                response = await logic()
             # that doesn't seem to exist...
             else:
                 response = "**:x: HELP - NONEXISTENT COMMAND **\n THAT is not a command currently supported.\n You can add a request with `$feature add {text}` or list the available commands with `$help`"
@@ -46,7 +48,8 @@ async def help_main():
         "- role     ::   adds or removes a role from you",
         "- quote    ::   fetches a random text or image quote from the specified service",
         "- nick     ::   can edit a user's nickname.",
-        "- math     ::   does some math stuff."
+        "- math     ::   does some math stuff.",
+        "- logic    ::   solves logical expressions and gives an ascii table"
     ]
 
     comm = ""
@@ -133,10 +136,33 @@ async def math():
         "- dec {num}             :: convert a positive binary integer to decimal",
         "- tofloat {float}       :: convert any floating point number to binary with IEEE745 standard",
         "- permutations {string} :: calculate the amount of unique permutations of {string}.",
-        "- logic {expression}    :: creates a logic table from the given expression. + is OR and * is AND, everything else: ¬, ⇔, ⇒, ⊕"
     ]
     comm = ""
     for i in alist:
         comm += i + "\n"
     response = f"**:grey_question: HELP    --    math **\nThis command can do some interesting mathematical stuff. You can use the command like this: `$math {{command}} {{arguments}}`.\nHere is the list of things that are currently possible:\n```asciidoc\n===== ACTIONS =====\n{comm}\n```"
     return response
+
+async def logic():
+    alist = [
+        "- unicode {expression}    :: creates a logic table from the given expression, UNICODE CHARACTERS ONLY!!",
+        "- ascii {expression}      :: creates a logic table from the given expression, ASCII CHARACTERS ONLY!!"
+    ]
+    table = [
+        "     Name    |  ASCII   |   UNICODE"
+        "      AND    |  \\and   |     ∧",
+        "      OR     |  \\or    |     ∨",
+        "      NOT    |  \\neg   |     ¬",
+        "      XOR    |  \\xor   |     ⊕",
+        " IMPLICATION |  \\imp   |     →"
+        " EQUIVALENCE |  \\equ   |     ↔"
+    ]
+    comm = ""
+    for i in alist:
+        comm += i + "\n"
+
+    sym = ""
+    for i in table:
+        sym += i + "\n"
+    syntax = f"```asciidoc\n==== SYMBOLS ====\n{sym}\n```"
+    response = f"**:grey_question: HELP    --    logic **\nThis command can evaluate logical expressions. You can use the command like this: `$logic {{command}} {{arguments}}`.\nHere is the list of things that are currently possible:\n```asciidoc\n===== ACTIONS =====\n{comm}\n```\n\n**SYMBOLS**\n{sym}"
