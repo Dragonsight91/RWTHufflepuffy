@@ -53,7 +53,7 @@ async def math_handler(bot:any, message:any):
 
             expr = logic.Equation(command[2])
             table = await expr.asciiTableSolve()
-            response = f"**:bar_chart: MATH - LOGIC SOLVER**\n```asciidoc\n==== LOGIC SOLVER ====\n- Expression: {expr.equation}\n{table}\n```"
+            response = f"**:bar_chart: MATH - LOGIC SOLVER**\n```asciidoc\n==== LOGIC SOLVER ====\n- Expression: {expr.equation}\n{table['header']}\n{table['table']}\n```"
             
         await message.channel.send(response)
     except Exception as e:
