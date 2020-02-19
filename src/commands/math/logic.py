@@ -13,8 +13,8 @@ async def logic_handler(bot: any, message: any):
             response = f"**:bar_chart: MATH - LOGIC SOLVER**\n```asciidoc\n==== LOGIC SOLVER ====\n- Expression: {expr.equation}\n{table['header']}\n\n{table['table']}\n```"
         
         elif command[1] == "ascii":
-            eq = await convert(command[1])
-            expr = logic.Equation(command[2])
+            eq = await convert(command[2])
+            expr = logic.Equation(eq)
             table = await expr.asciiTableSolve()
             response = f"**:bar_chart: MATH - LOGIC SOLVER**\n```asciidoc\n==== LOGIC SOLVER ====\n- Expression: {expr.equation}\n{table['header']}\n\n{table['table']}\n```"
     
