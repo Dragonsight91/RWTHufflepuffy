@@ -137,8 +137,10 @@ class Equation(object):
             for index, key in enumerate(keys):
                 self.Vars[key] = bool(int(counter[index]))
                 row += f'  {int(self.Vars[key])}  |'
+            
+            res = await self.solve()
             try:
-                out["table"] += f"{row}  {int(eval(await self.solve()))} \n"
+                out["table"] += f"{row}  {int(eval(res))} \n"
             except Exception as e:
                 print(e)
 
