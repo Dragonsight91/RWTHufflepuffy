@@ -138,6 +138,6 @@ class Equation(object):
                 self.Vars[key] = bool(int(counter[index]))
                 row += f'  {int(self.Vars[key])}  |'
             
-            out["table"] += f"{row}  {int(eval(self.solve()))} \n"
+            out["table"] += f"{row}  {int(eval(await self.solve()))} \n"
 
         return out
