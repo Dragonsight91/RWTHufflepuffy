@@ -133,7 +133,7 @@ async def math():
         "- dec {num}             :: convert a positive binary integer to decimal",
         "- tofloat {float}       :: convert any floating point number to binary with IEEE745 standard",
         "- permutations {string} :: calculate the amount of unique permutations of {string}.",
-        #"- logic {expression}    :: creates a logic table from the given expression. + is OR and * is AND, everything else: ¬, ⇔, ⇒, ⊕"
+        "- logic {expression}    :: creates a logic table from the given expression. + is OR and * is AND, everything else: ¬, ⇔, ⇒, ⊕"
     ]
     comm = ""
     for i in alist:

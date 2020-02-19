@@ -48,6 +48,9 @@ async def math_handler(bot:any, message:any):
                 groups += f"    - Group Name: {i}      Count: {out['groups'][i]}\n"
             response = f"**:bar_chart: MATH - PERMUTATIONS**\n```asciidoc\n==== PERMUTATION CALCULATION ====\nYour Input: {command[2]}\nPermutations: {out['perms']}\nGroups:\n{groups}"
 
+        elif command[1] == "logic":
+            pass
+            
         await message.channel.send(response)
     except Exception as e:
         await message.channel.send(f"**:x: MATH - ERROR **\nHey {devRole.mention} There was an error.\n```\n{e}\n```")
