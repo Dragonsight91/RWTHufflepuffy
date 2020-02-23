@@ -1,4 +1,3 @@
-from . import inspirobot
-from . import quotable
+from . import api
 
-__all__ = [ "inspirobot", "quotable" ]
+__all__ = [ "api" ]

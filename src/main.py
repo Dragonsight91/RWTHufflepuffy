@@ -24,8 +24,8 @@ class RWTHufflepuffy(discord.Client):
         # save all necessary things in the bot
         self.votes = []
         self.mongo = pymongo.MongoClient(mongoUri, port=47410)
-        self.inspirobot = extra.inspirobot.inspirobot()
-        self.quotable = extra.quotable.quotable()
+        self.inspirobot = extra.api.inspirobot.inspirobot()
+        self.quotable = extra.api.quotable.quotable()
 
         # change bot's status
         await self.change_presence(activity=discord.Game(name='with fire'))

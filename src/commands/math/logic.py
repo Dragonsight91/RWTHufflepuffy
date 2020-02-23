@@ -27,11 +27,11 @@ async def logic_handler(bot: any, message: any):
 async def convert(eq: str):
     list = [
         { "from" : "\\and", "to": "∧"},
-        { "from" : "\\or", "to": "∨"},
+        { "from" : "\\or", "to": "∨" },
         { "from" : "\\xor", "to": "⊕"},
         { "from" : "\\imp", "to": "⇒"},
         { "from" : "\\equ", "to": "⇔"},
-        { "from" : "\\neg", "to": "¬"}
+        { "from" : "\\neg", "to": "¬" }
     ]
     out = eq
     for char in list:
