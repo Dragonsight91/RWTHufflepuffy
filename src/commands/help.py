@@ -27,6 +27,8 @@ async def help_handler(bot, message):
                 response = await math()
             elif command[1] == "logic":
                 response = await logic()
+            elif command[1] == "course":
+                response = await course()
             # that doesn't seem to exist...
             else:
                 response = "**:x: HELP - NONEXISTENT COMMAND **\n THAT is not a command currently supported.\n You can add a request with `$feature add {text}` or list the available commands with `$help`"
@@ -166,5 +168,30 @@ async def logic():
         sym += i + "\n"
     syntax = f"```asciidoc\n==== SYMBOLS ====\n{sym}\n```"
     response = f"**:grey_question: HELP    --    logic **\nThis command can evaluate logical expressions. You can use the command like this: `$logic {{command}} {{arguments}}`.\nHere is the list of things that are currently possible:\n```asciidoc\n===== ACTIONS =====\n{comm}\n```\n\n**SYMBOLS**\n{syntax}"
+
+    return response
+
+
+async def course():
+    alist = [
+        "- add {name}; {channels}; {voice} :: adds a course with specified additional channels",
+        "- edit {name}; {channels}         :: adds a topic channel to the course containing {name} in the title "
+    ]
+    placeholders = [
+        "- channels  :: comma separated list of channels in format {type}:{name}",
+        "- name      :: the name of the course to create/edit",
+        "- channels  :: comma separated list in the format {type}:{name}"
+        "- type      :: channel type (text/voice/both)"
+    ]
+    comm = ""
+    for i in alist:
+        comm += i + "\n"
+
+    sym = ""
+    for i in placeholders:
+        sym += i + "\n"
+
+    syntax = f"```asciidoc\n==== PLACEHOLDERS ====\n{sym}\n\nWhen using the 'edit' action, you do not need to use the full name. As long as you give part of the name, it will use the first category that matches. This match is fuzzy, meaning that there may be multiple matched, but this command only takes the FIRST match.\n==== EXAMPLE ====\n$course edit Lineare; text:Math\n\n this creates a text channel called Math in Lineare Algebra.```"
+    response = f"**:grey_question: HELP    --    course **\nThis command adds or edits the Courses available.\n```asciidoc\n==== ACTIONS ====\n{comm}\n```\n\n**Arguments**\n{syntax}"
 
     return response
