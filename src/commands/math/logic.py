@@ -22,7 +22,7 @@ async def logic_handler(bot: any, message: any):
     
         await message.channel.send(response)
     except Exception as e:
-        await message.channel.send(f"**:x: HELP - ERROR **\nHey {devRole.mention} There was an error.\n```\n{e}\n```")
+        await message.channel.send(f"**:x: LOGIC - ERROR **\nHey {devRole.mention} There was an error.\n```\n{e}\n```")
 
 async def convert(eq: str):
     list = [

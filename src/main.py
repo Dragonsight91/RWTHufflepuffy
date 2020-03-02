@@ -115,6 +115,8 @@ class RWTHufflepuffy(discord.Client):
         
         elif message.content.startswith("$logic"):
             await commands.math.logic.logic_handler(self, message)
+        elif message.content.startswith("$course"):
+            await commands.course.course_handler(self, message)
 # START DAT SHIT
 bot = RWTHufflepuffy()
 bot.run(os.environ['DISCORD_KEY'])
