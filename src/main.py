@@ -2,7 +2,6 @@
 import discord
 import pymongo
 import re
-from urllib.parse import quote
 import os
 
 # import all internal things
